@@ -35,4 +35,4 @@ The purpose of the project is to present the Fundamentals of Software Engineerin
 
 The next step is to use class diagrams and use cases for future coding, testing, and design and architecture patterns, thus applying all the basic concepts of Software Engineering.
 
-![diagram class](./assets/class-diagram.png.png)
+![diagram class](./assets/class-diagram.png)
