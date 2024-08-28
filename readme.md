@@ -1,5 +1,5 @@
 # Boilerplate Node Typescript
-This project is starter template for TypeScript. For personal projects and teaching, providing a minimum structure.
+This project is starter template for TypeScript. For personal projects and teaching, providing a minimum structure. Acess: https://github.com/christiancesar/christiancesar-boilerplate-node-typescript
 
 ```json
 //package.json
@@ -29,3 +29,10 @@ This project is starter template for TypeScript. For personal projects and teach
   }
 }
 ```
+
+# My University 
+The purpose of the project is to present the Fundamentals of Software Engineering, giving students the perception of evolution after having completed an assessment of functional and non-functional requirements.
+
+The next step is to use class diagrams and use cases for future coding, testing, and design and architecture patterns, thus applying all the basic concepts of Software Engineering.
+
+![diagram class](./assets/class-diagram.png.png)
