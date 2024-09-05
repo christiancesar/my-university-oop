@@ -1,5 +1,5 @@
 // import { User } from "src/user.js";
-
+export {};
 // describe("User", () => {
 //   it("should create a new user", () => {
 //     const user = new User(
