@@ -1,8 +1,8 @@
 import { Discipline } from "../entities/discipline.js";
 import { Workload } from "../entities/workload.js";
 
-export class DisciplineFactory {
-  static make(): Discipline[] {
+export class DisciplinesSeed {
+  static execute(): Discipline[] {
     const aep = new Discipline(
       3389,
       "ALGORITMOS E PROGRAMAÇÃO",
