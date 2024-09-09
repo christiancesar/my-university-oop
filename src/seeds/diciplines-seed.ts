@@ -181,6 +181,28 @@ export class DisciplinesSeed {
     );
 
     return [
+      aep,
+      aoc,
+      fsi,
+      tdm,
+      dbOne,
+      edd,
+      fes,
+      dbTwo,
+      poo,
+      extOne,
+      pdb,
+      extTwo,
+      sop,
+      aps,
+      pwOne,
+      extTree,
+      cdd,
+      gti,
+      extFour,
+      qds,
+      rdc,
+      gps,
       new Discipline(
         3210,
         "LÍNGUA INGLESA",

@@ -14,13 +14,13 @@ type DiciplineFactoryParams = {
 };
 
 export class DisciplinesFactory {
-  static make(discipline: DiciplineFactoryParams): Discipline {
-    const shortId = discipline.shortId ?? 0;
-    const name = discipline.name ?? "nome-padrão";
-    const workload = discipline.workload ?? { pratical: 32, theorical: 32 };
-    const period = discipline.period ?? 0;
-    const prerequisites = discipline.prerequisites ?? null;
-    const isRequired = discipline.isRequired ?? false;
+  static make(discipline?: DiciplineFactoryParams): Discipline {
+    const shortId = discipline?.shortId ?? 0;
+    const name = discipline?.name ?? "nome-padrão";
+    const workload = discipline?.workload ?? { pratical: 32, theorical: 32 };
+    const period = discipline?.period ?? 0;
+    const prerequisites = discipline?.prerequisites ?? null;
+    const isRequired = discipline?.isRequired ?? false;
 
     return new Discipline(
       shortId,

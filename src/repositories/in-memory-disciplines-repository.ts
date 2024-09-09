@@ -21,7 +21,9 @@ export class InMemoryDisciplinesRepository {
     );
   }
 
-  findByName(name: string): Discipline | undefined {
-    return this.disciplines.find((discipline) => discipline.name === name);
+  findByName(name: string): Discipline[] | undefined {
+    return this.disciplines.filter(
+      (discipline) => discipline.name.toLocaleLowerCase().search(name) !== -1
+    );
   }
 }

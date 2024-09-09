@@ -25,14 +25,13 @@ describe("Student", () => {
     expect(student.getRegistration()).toBeTypeOf("string");
   });
 
-  it.only("should be able search a student by name", () => {
+  it("should be able search a student by name", () => {
     const inMemoryStudentsRepository = new InMemoryStudentsRepository();
     const students = StudentsSeed.execute();
     for (let student of students) {
       inMemoryStudentsRepository.save(student);
     }
     const studentFilter = inMemoryStudentsRepository.findByName("daniel");
-    console.log(studentFilter);
     expect(studentFilter).toHaveLength(3);
     expect(studentFilter).toMatchObject([
       { name: "Daniel Castilho de Oliveira" },
