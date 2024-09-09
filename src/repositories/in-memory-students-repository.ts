@@ -11,6 +11,12 @@ export class InMemoryStudentsRepository {
     return this.students.find((student) => student.getId() === id);
   }
 
+  findByName(name: string): Student[] | undefined {
+    return this.students.filter(
+      (student) => student.getName().toLocaleLowerCase().search(name) !== -1
+    );
+  }
+
   findAll(): Student[] {
     return this.students;
   }
