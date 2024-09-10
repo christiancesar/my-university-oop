@@ -1,118 +1,118 @@
 import { Student } from "../entities/student.js";
-import { StudentsFactory } from "../factories/students-factory.js";
+import { StudentFactory } from "../factories/student-factory.js";
 
 export class StudentsSeed {
   static execute(): Student[] {
     return [
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Alysson Eduardo Sobrinho Rodrigues",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Anna Beatriz Fernandes Araujo",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Antonio Gabriel de Souza Silva Fernandes",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Bruno Gabriel Palmeira da Costa Paniago",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Carla Cintra",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Cristhian Gabriel Padim Araujo",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Daniel Castilho de Oliveira",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Danielly Santos Nunes de Oliveira",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Daniel Veloso da Silva",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Douglas Pereira de Godoy",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Eagles de Amorim Oliveira",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Edson Tasca Porto Neto",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Fellipp e Victorio Meciano Fernandes",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Gabriel de Sousa",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Gabriel Eduardo Dembinski",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Gabriella da Silva Nunes",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Gabriel Ribeiro Vitor",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Guilherme Antony Sousa Rizzi",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Guilherme Ribeiro Barros",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Guilherme Ricardo Pires Nunes",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Henrique Pedrôso Morais Loiola",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Hugo Adriano de Oliveira",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Ian Clei Eichler Cecilio",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Iasmyn Gabriely de Melo Matos",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Isaac Pierry Farias Ferreira",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Jaylson Medeiros da Silva",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Jhuan Sales Silva",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Joabe dos Santos Nogueira",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "João Pedro Franco Brocuá de Carvalho",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Joao Vitor da Veiga Lafourcade",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Joni de Oliveira Gamarra",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Jordana Bezerra de Almeida",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Kamila Noely Cardoso Tavares",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Kazuo Vitor Moraes Aiura",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Leonardo Cavalcante Araujo Borchardt",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Luan dos Santos Souza",
       }),
-      StudentsFactory.make({
+      StudentFactory.make({
         name: "Maria Luisa Figueiredo Dias de Santana",
       }),
     ];

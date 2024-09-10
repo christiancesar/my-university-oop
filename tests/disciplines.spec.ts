@@ -1,5 +1,5 @@
 import { Discipline } from "../src/entities/discipline.js";
-import { DisciplinesFactory } from "../src/factories/disciplines-factory.js";
+import { DisciplineFactory } from "../src/factories/discipline-factory.js";
 import { InMemoryDisciplinesRepository } from "../src/repositories/in-memory-disciplines-repository.js";
 import { DisciplinesSeed } from "../src/seeds/diciplines-seed.js";
 
@@ -14,7 +14,7 @@ describe("Disciplines", () => {
   });
 
   it("should be able create a new discipline", () => {
-    const discipline = DisciplinesFactory.make({ name: "Discipline" });
+    const discipline = DisciplineFactory.make({ name: "Discipline" });
     expect(discipline).toEqual(expect.objectContaining({ name: "Discipline" }));
   });
 
@@ -35,10 +35,10 @@ describe("Disciplines", () => {
   });
 
   it("should be able attch a prerequisite to a discipline", () => {
-    const disciplinePreRequisites = DisciplinesFactory.make({
+    const disciplinePreRequisites = DisciplineFactory.make({
       name: "PreRequisite Discipline",
     });
-    const discipline = DisciplinesFactory.make({
+    const discipline = DisciplineFactory.make({
       name: "Discipline",
       prerequisites: disciplinePreRequisites,
     });

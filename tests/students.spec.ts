@@ -1,11 +1,11 @@
 import { Student } from "../src/entities/student.js";
-import { StudentsFactory } from "../src/factories/students-factory.js";
+import { StudentFactory } from "../src/factories/student-factory.js";
 import { InMemoryStudentsRepository } from "../src/repositories/in-memory-students-repository.js";
 import { StudentsSeed } from "../src/seeds/students-seed.js";
 
 describe("Student", () => {
   it("should be able create a new student", () => {
-    const student = StudentsFactory.make({ name: "Jhon Doe" });
+    const student = StudentFactory.make({ name: "Jhon Doe" });
     expect(student).toEqual(expect.objectContaining({ name: "Jhon Doe" }));
   });
 
@@ -16,12 +16,12 @@ describe("Student", () => {
   });
 
   it("should be able return a student email institutional automatic when created a new student", () => {
-    const student = StudentsFactory.make({ name: "Jhon Doe" });
+    const student = StudentFactory.make({ name: "Jhon Doe" });
     expect(student.getEmail()).toEqual("jhon.doe@aluno.ufr.edu.br");
   });
 
   it("should be able return a student registration automatic when created a new student", () => {
-    const student = StudentsFactory.make({ name: "Jhon Doe" });
+    const student = StudentFactory.make({ name: "Jhon Doe" });
     expect(student.getRegistration()).toBeTypeOf("string");
   });
 

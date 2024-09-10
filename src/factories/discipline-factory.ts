@@ -1,5 +1,6 @@
 import { Discipline } from "../entities/discipline.js";
 import { Workload } from "../entities/workload.js";
+
 type DiciplineFactoryParams = {
   id?: string;
   name?: string;
@@ -13,7 +14,7 @@ type DiciplineFactoryParams = {
   prerequisites?: Discipline | null;
 };
 
-export class DisciplinesFactory {
+export class DisciplineFactory {
   static make(discipline?: DiciplineFactoryParams): Discipline {
     const shortId = discipline?.shortId ?? 0;
     const name = discipline?.name ?? "nome-padrão";

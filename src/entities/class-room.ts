@@ -4,7 +4,7 @@ import { Student } from "./student.js";
 import { Workload } from "./workload.js";
 
 class StudentOfDiscipline {
-  student: Omit<Student, "disciplies">;
+  student: Student;
   grade: number[];
   finalGrade: number | null;
   workload: Workload;
@@ -12,7 +12,7 @@ class StudentOfDiscipline {
   isFinished: boolean;
   description: string;
 
-  constructor(student: Omit<Student, "disciplies">) {
+  constructor(student: Student) {
     this.student = student;
     this.grade = [0];
     this.finalGrade = null;
@@ -37,7 +37,15 @@ export class ClassRoom extends Entity {
     this.createdAt = new Date();
   }
 
-  public addStudent(student: Omit<Student, "disciplies">): void {
+  getDiscipline(): Discipline {
+    return this.discipline;
+  }
+
+  getStudents(): StudentOfDiscipline[] {
+    return this.students;
+  }
+
+  public addStudent(student: Student): void {
     this.students.push(new StudentOfDiscipline(student));
     this.updatedAt = new Date();
   }
