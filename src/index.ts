@@ -1,4 +1,5 @@
 import { ClassRoom } from "./entities/class-room.js";
+import { inheritanceMain } from "./entities/inheritance-examples/index.js";
 import { Student } from "./entities/student.js";
 import { Workload } from "./entities/workload.js";
 import { ClassRoomFactory } from "./factories/class-room-factory.js";
@@ -36,8 +37,11 @@ function main() {
   // classRoom.calculateAverageStudents();
   // classRoom.showTheFinalGrade();
 
-  const classRoom = ClassRoomFactory.make({ discipline: disciplines[0] });
-  console.log(JSON.stringify(classRoom, null, 2));
+  // const classRoom = ClassRoomFactory.make({ discipline: disciplines[0] });
+  // console.log(JSON.stringify(classRoom, null, 2));
+
+  //example inheritance
+  inheritanceMain();
 }
 
 main();
