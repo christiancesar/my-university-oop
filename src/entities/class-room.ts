@@ -1,6 +1,7 @@
 import { Discipline } from "./discipline.js";
 import { Entity } from "./entity.js";
-import { Student } from "./student.js";
+import { Student } from "./inheritance-examples/student-inheritance.js";
+import { Teacher } from "./teacher.js";
 import { Workload } from "./workload.js";
 
 class StudentOfDiscipline {
@@ -25,6 +26,7 @@ class StudentOfDiscipline {
 
 export class ClassRoom extends Entity {
   private discipline: Discipline;
+  // private teacher: Teacher;
   private students: StudentOfDiscipline[];
   private createdAt: Date;
   private updatedAt?: Date | null;
@@ -57,7 +59,7 @@ export class ClassRoom extends Entity {
 
   public updateWorkloadStudent(studentId: string, workload: Workload): void {
     const student = this.students.find(
-      (student) => student.student.getId() === studentId
+      (studentClassRomm) => studentClassRomm.student.getId() === studentId
     );
 
     if (student) {
@@ -101,7 +103,7 @@ export class ClassRoom extends Entity {
       student.isFinished = true;
       student.description = student.itApproved
         ? `The Student approved: with grade ${average} and worload ${workloadPercent}%`
-        : `The Student was not approved: with grade ${average} and worload ${workloadPercent}%`;
+        : `The Student was not approved: grade ${average} and worload ${workloadPercent}%`;
     });
 
     this.conclusedAt = new Date();
@@ -111,11 +113,11 @@ export class ClassRoom extends Entity {
     if (this.conclusedAt) {
       this.students.forEach((student) => {
         console.log(`
-        Student: ${student.student.getName()}
-        Grade: ${student.finalGrade}
-        Workload: ${student.workload.getTotal()}
-        Description: ${student.description}
-      `);
+          Student: ${student.student.getName()}
+          Grade: ${student.finalGrade}
+          Workload: ${student.workload.getTotal()}
+          Description: ${student.description}
+        `);
       });
     } else {
       console.error("The class is not finished");

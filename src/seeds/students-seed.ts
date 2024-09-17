@@ -1,4 +1,4 @@
-import { Student } from "../entities/student.js";
+import { Student } from "../entities/inheritance-examples/student-inheritance.js";
 import { StudentFactory } from "../factories/student-factory.js";
 
 export class StudentsSeed {

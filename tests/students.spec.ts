@@ -5,14 +5,14 @@ import { StudentsSeed } from "../src/seeds/students-seed.js";
 
 describe("Student", () => {
   it("should be able create a new student", () => {
-    const student = StudentFactory.make({ name: "Jhon Doe" });
+    const student = StudentFactory.make({ name: "Jhon Doe Doe" });
     expect(student).toEqual(expect.objectContaining({ name: "Jhon Doe" }));
   });
 
   it("should be able seed students", () => {
     const students = StudentsSeed.execute();
     const studentsLength = students.length;
-    expect(students).toHaveLength(studentsLength);
+    expect(students).toHaveLength(37);
   });
 
   it("should be able return a student email institutional automatic when created a new student", () => {
@@ -28,6 +28,7 @@ describe("Student", () => {
   it("should be able search a student by name", () => {
     const inMemoryStudentsRepository = new InMemoryStudentsRepository();
     const students = StudentsSeed.execute();
+
     for (let student of students) {
       inMemoryStudentsRepository.save(student);
     }
