@@ -1,11 +1,8 @@
-import { ClassRoom } from "./entities/class-room.js";
-import { inheritanceMain } from "./entities/inheritance-examples/index.js";
-import { User } from "./entities/inheritance-examples/user.js";
-// import { Student } from "./entities/student.js";
+import { Student } from "./entities/student.js";
+import { Teacher } from "./entities/teacher.js";
 import { Workload } from "./entities/workload.js";
 import { ClassRoomFactory } from "./factories/class-room-factory.js";
-import { DisciplineFactory } from "./factories/discipline-factory.js";
-import { StudentFactory } from "./factories/student-factory.js";
+import { PersonFactory } from "./factories/person-factory.js";
 import { DisciplinesSeed } from "./seeds/diciplines-seed.js";
 import { StudentsSeed } from "./seeds/students-seed.js";
 
@@ -15,8 +12,6 @@ function main() {
 
   // const students = StudentsSeed.execute();
   // console.log(JSON.stringify(students, null, 2));
-
-  // const classRoom = new ClassRoom(disciplines[0]);
 
   // const classRoom = ClassRoomFactory.make({ discipline: disciplines[0] });
 
@@ -31,8 +26,9 @@ function main() {
   // classRoom.calculateAverageStudents();
   // classRoom.showTheFinalGrade();
 
-  // example inheritance
-  inheritanceMain();
+  // });
+  console.log(PersonFactory.make(Student));
+  console.log(PersonFactory.make(Teacher));
 }
 
 main();

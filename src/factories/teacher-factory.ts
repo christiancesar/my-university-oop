@@ -1,20 +1,20 @@
 import { fa, faker } from "@faker-js/faker";
-import { Student } from "../entities/student.js";
+import { Teacher } from "../entities/teacher.js";
 import { Address } from "../entities/address.js";
 
-type StudentsFactoryParams = {
+type TeacherFactoryParams = {
   id?: string;
   name?: string;
 };
 
-export class StudentFactory {
-  static make(student?: StudentsFactoryParams): Student {
-    const name = student?.name ?? faker.person.fullName();
+export class TeacherFactory {
+  static make(teacher?: TeacherFactoryParams): Teacher {
+    const name = teacher?.name ?? faker.person.fullName();
     const cpf = "123.456.789-00";
     const birthday = faker.date.birthdate();
 
-    const newStudent = new Student(name, cpf, birthday);
-    newStudent.setAddresses(
+    const newTeacher = new Teacher(name, cpf, birthday);
+    newTeacher.setAddresses(
       new Address(
         faker.location.street(),
         faker.location.buildingNumber(),
@@ -25,6 +25,6 @@ export class StudentFactory {
       )
     );
 
-    return newStudent;
+    return newTeacher;
   }
 }
