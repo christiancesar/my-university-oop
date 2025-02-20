@@ -6,6 +6,10 @@ import { Student } from "./student.js";
 import { Teacher } from "./teacher.js";
 import { Workload } from "./workload.js";
 
+/**
+ * A classe ClassRoom representa uma sala de aula.
+ * Ela herda da classe Entity e contém informações sobre a disciplina, professor, estudantes e relatórios diários.
+ */
 export class ClassRoom extends Entity {
   private discipline: Discipline;
   private teacher: Teacher;
@@ -15,6 +19,12 @@ export class ClassRoom extends Entity {
   private updatedAt?: Date | null;
   private conclusedAt?: Date | null;
 
+  /**
+   * Construtor da classe ClassRoom.
+   * @param discipline - A disciplina associada à sala de aula.
+   * @param teacher - O professor responsável pela sala de aula.
+   * @param id - O ID da sala de aula (opcional).
+   */
   constructor(discipline: Discipline, teacher: Teacher, id?: string) {
     super(id);
     this.teacher = teacher;
@@ -24,24 +34,44 @@ export class ClassRoom extends Entity {
     this.createdAt = new Date();
   }
 
+  /**
+   * Obtém a disciplina associada à sala de aula.
+   * @returns A disciplina.
+   */
   getDiscipline(): Discipline {
     return this.discipline;
   }
 
+  /**
+   * Obtém os estudantes matriculados na sala de aula.
+   * @returns Uma lista de estudantes.
+   */
   getStudents(): StudentOfDiscipline[] {
     return this.students;
   }
 
+  /**
+   * Adiciona um estudante à sala de aula.
+   * @param student - O estudante a ser adicionado.
+   */
   public addStudent(student: Student): void {
     this.students.push(new StudentOfDiscipline(student));
     this.updatedAt = new Date();
   }
 
+  /**
+   * Finaliza a aula.
+   */
   public fineshedClass(): void {
     this.conclusedAt = new Date();
     this.updatedAt = new Date();
   }
 
+  /**
+   * Atualiza a carga horária de um estudante.
+   * @param studentId - O ID do estudante.
+   * @param dailyId - O ID do relatório diário.
+   */
   public updateWorkloadStudent(studentId: string, dailyId: string): void {
     try {
       const student = this.students.find(
@@ -60,7 +90,6 @@ export class ClassRoom extends Entity {
       }
 
       student.workload.setPratical(dailyExist.classRoomWorkload.getPratical());
-
       student.workload.setTheorical(
         dailyExist.classRoomWorkload.getTheorical()
       );
@@ -71,6 +100,11 @@ export class ClassRoom extends Entity {
     }
   }
 
+  /**
+   * Atualiza a nota de um estudante.
+   * @param studentId - O ID do estudante.
+   * @param grade - A nota a ser adicionada.
+   */
   public updateGradeStudent(studentId: string, grade: number): void {
     const student = this.students.find(
       (student) => student.student.getId() === studentId
@@ -84,6 +118,12 @@ export class ClassRoom extends Entity {
     }
   }
 
+  /**
+   * Cria um relatório diário.
+   * @param description - A descrição do relatório.
+   * @param classRoomWorkload - A carga horária da sala de aula.
+   * @returns O ID do relatório diário criado ou null em caso de erro.
+   */
   public createDailyReport(
     description: string,
     classRoomWorkload: Workload
@@ -112,6 +152,10 @@ export class ClassRoom extends Entity {
     }
   }
 
+  /**
+   * Calcula a média dos estudantes.
+   * Este método é privado e é utilizado internamente pela classe.
+   */
   private calculateAverageStudents(): void {
     this.students.forEach((student) => {
       const sum = student.grade.reduce((acc, grade) => acc + grade, 0);
@@ -128,6 +172,9 @@ export class ClassRoom extends Entity {
     });
   }
 
+  /**
+   * Finaliza a aula e calcula as médias dos estudantes.
+   */
   public endClass(): void {
     try {
       this.calculateAverageStudents();
@@ -138,6 +185,10 @@ export class ClassRoom extends Entity {
     }
   }
 
+  /**
+   * Mostra o boletim dos estudantes.
+   * Este método é privado e é utilizado internamente pela classe.
+   */
   private showTheBulletin(): void {
     if (this.conclusedAt) {
       this.students.forEach((student) => {

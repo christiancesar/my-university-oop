@@ -1,15 +1,10 @@
-import { Teacher } from "../teacher.js";
+import { Student } from "./student-inheritance.js";
 import { Teacher as TeacherInhritance } from "./teacher-inheritance.js";
 import { User } from "./user.js";
 
 export function inheritanceMain() {
-  const teacher = new Teacher(
-    "Christian Cesar",
-    "999.999.999-99",
-    new Date("2020-01-01")
-  );
-  console.log(teacher.getRegistration());
-  console.log(teacher.getEmail());
+  const teacher = new Student("Christian Cesar");
+  console.log(teacher);
 
   const teacherInhritance = new TeacherInhritance("Christian Cesar");
   console.log(teacherInhritance.getRegistration());

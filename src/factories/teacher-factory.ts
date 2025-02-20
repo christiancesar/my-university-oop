@@ -7,7 +7,15 @@ type TeacherFactoryParams = {
   name?: string;
 };
 
+/**
+ * Fábrica para criar instâncias de Teacher.
+ */
 export class TeacherFactory {
+  /**
+   * Cria uma nova instância de Teacher.
+   * @param teacher Parâmetros opcionais para criar o Teacher.
+   * @returns Uma nova instância de Teacher.
+   */
   static make(teacher?: TeacherFactoryParams): Teacher {
     const name =
       teacher?.name ?? `${faker.person.firstName()} ${faker.person.lastName()}`;

@@ -4,7 +4,7 @@ import { ClassRoomFactory } from "./factories/class-room-factory.js";
 import { DisciplinesSeed } from "./seeds/diciplines-seed.js";
 import { StudentsSeed } from "./seeds/students-seed.js";
 
-function main() {
+export function main() {
   const disciplines = DisciplinesSeed.execute();
   // console.log(JSON.stringify(disciplines, null, 2));
 

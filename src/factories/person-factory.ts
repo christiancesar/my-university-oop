@@ -8,7 +8,16 @@ type PersonFactoryParams = {
   birthday?: Date;
 };
 
+/**
+ * Fábrica para criar instâncias de Person.
+ */
 export class PersonFactory {
+  /**
+   * Cria uma nova instância de Person.
+   * @param ctor Construtor da classe que estende Person.
+   * @param params Parâmetros opcionais para criar a Person.
+   * @returns Uma nova instância de Person.
+   */
   static make<T extends Person>(
     ctor: new (name: string, cpf: string, birthday: Date, id?: string) => T,
     params?: PersonFactoryParams

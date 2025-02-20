@@ -14,7 +14,15 @@ type DiciplineFactoryParams = {
   prerequisites?: Discipline | null;
 };
 
+/**
+ * Fábrica para criar instâncias de Discipline.
+ */
 export class DisciplineFactory {
+  /**
+   * Cria uma nova instância de Discipline.
+   * @param discipline Parâmetros opcionais para criar a Discipline.
+   * @returns Uma nova instância de Discipline.
+   */
   static make(discipline?: DiciplineFactoryParams): Discipline {
     const shortId = discipline?.shortId ?? 0;
     const name = discipline?.name ?? "nome-padrão";
