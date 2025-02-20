@@ -19,7 +19,7 @@ export class StudentOfDiscipline {
    */
   constructor(student: Student) {
     this.student = student;
-    this.grade = [0];
+    this.grade = [];
     this.finalGrade = null;
     this.workload = new Workload(0, 0);
     this.itApproved = false;

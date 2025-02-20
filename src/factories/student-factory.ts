@@ -9,7 +9,8 @@ type StudentsFactoryParams = {
 
 export class StudentFactory {
   static make(student?: StudentsFactoryParams): Student {
-    const name = student?.name ?? faker.person.fullName();
+    const name =
+      student?.name ?? `${faker.person.firstName()} ${faker.person.lastName()}`;
     const cpf = "123.456.789-00";
     const birthday = faker.date.birthdate();
 

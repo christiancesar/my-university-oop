@@ -6,7 +6,7 @@ import { TeacherFactory } from "./teacher-factory.js";
 
 type ClassRoomFactoryParams = {
   discipline: Discipline;
-  teacher: Teacher;
+  teacher?: Teacher;
 };
 
 export class ClassRoomFactory {

@@ -44,7 +44,7 @@ export class Workload {
    * @param pratical - Nova carga horária prática.
    */
   public setPratical(pratical: number): void {
-    this.pratical += pratical;
+    this.pratical = this.pratical + pratical;
   }
 
   /**
@@ -52,6 +52,6 @@ export class Workload {
    * @param theorical - Nova carga horária teórica.
    */
   public setTheorical(theorical: number): void {
-    this.theorical += theorical;
+    this.theorical = this.theorical + theorical;
   }
 }

@@ -1,6 +1,3 @@
-/**
- * Classe que representa uma sala de aula.
- */
 import { Discipline } from "./discipline.js";
 import { Entity } from "./entity.js";
 import { StudentOfDiscipline } from "./student-discipline.js";
@@ -8,92 +5,84 @@ import { Student } from "./student.js";
 import { Teacher } from "./teacher.js";
 import { Workload } from "./workload.js";
 
+class DailyReport extends Entity {
+  description: string;
+  classRoomWorkload: Workload;
+  private createdAt: Date;
+
+  constructor(description: string, classRoomWorkload: Workload, id?: string) {
+    super(id);
+    this.description = description;
+    this.classRoomWorkload = classRoomWorkload;
+    this.createdAt = new Date();
+  }
+}
+
 export class ClassRoom extends Entity {
   private discipline: Discipline;
   private teacher: Teacher;
   private students: StudentOfDiscipline[];
+  private dailyReports: DailyReport[];
   private createdAt: Date;
   private updatedAt?: Date | null;
   private conclusedAt?: Date | null;
 
-  /**
-   * Construtor da classe ClassRoom.
-   * @param discipline - Disciplina da sala de aula.
-   * @param teacher - Professor da sala de aula.
-   * @param Id - Id opcional da sala de aula.
-   */
   constructor(discipline: Discipline, teacher: Teacher, id?: string) {
     super(id);
     this.teacher = teacher;
     this.discipline = discipline;
     this.students = [];
+    this.dailyReports = [];
     this.createdAt = new Date();
   }
 
-  /**
-   * Obtém a disciplina da sala de aula.
-   * @returns A disciplina.
-   */
   getDiscipline(): Discipline {
     return this.discipline;
   }
 
-  /**
-   * Obtém os estudantes da sala de aula.
-   * @returns A lista de estudantes.
-   */
   getStudents(): StudentOfDiscipline[] {
     return this.students;
   }
 
-  /**
-   * Adiciona um estudante à sala de aula.
-   * @param student - Estudante a ser adicionado.
-   */
   public addStudent(student: Student): void {
     this.students.push(new StudentOfDiscipline(student));
     this.updatedAt = new Date();
   }
 
-  /**
-   * Finaliza a sala de aula.
-   */
   public fineshedClass(): void {
     this.conclusedAt = new Date();
     this.updatedAt = new Date();
   }
 
-  /**
-   * Atualiza a carga horária de um estudante.
-   * @param studentId - ID do estudante.
-   * @param workload - Nova carga horária.
-   */
-  public updateWorkloadStudent(studentId: string, workload: Workload): void {
-    const student = this.students.find(
-      (studentClassRomm) => studentClassRomm.student.getId() === studentId
-    );
+  public updateWorkloadStudent(studentId: string, dailyId: string): void {
+    try {
+      const student = this.students.find(
+        (studentClassRomm) => studentClassRomm.student.getId() === studentId
+      );
+      const dailyExist = this.dailyReports.find(
+        (daily) => daily.getId() === dailyId
+      );
 
-    if (student) {
-      if (student.workload.getTotal() < this.discipline.workload.getTotal()) {
-        if (student.workload.getPratical() < workload.getPratical()) {
-          student.workload.setPratical(workload.getPratical());
-        }
-
-        if (student.workload.getTheorical() < workload.getTheorical()) {
-          student.workload.setTheorical(workload.getTheorical());
-        }
-        this.updatedAt = new Date();
+      if (!student) {
+        throw new Error("Student not found");
       }
-    } else {
-      throw new Error("Student not found");
+
+      if (!dailyExist) {
+        throw new Error("Daily not found");
+      }
+
+      student.workload.setPratical(dailyExist.classRoomWorkload.getPratical());
+
+      student.workload.setTheorical(
+        dailyExist.classRoomWorkload.getTheorical()
+      );
+
+      this.updatedAt = new Date();
+    } catch (error: any) {
+      console.error(error.message);
     }
   }
 
-  /**
-   * Atualiza a nota de um estudante.
-   * @param studentId - ID do estudante.
-   * @param grade - Nova nota.
-   */
   public updateGradeStudent(studentId: string, grade: number): void {
     const student = this.students.find(
       (student) => student.student.getId() === studentId
@@ -107,10 +96,35 @@ export class ClassRoom extends Entity {
     }
   }
 
-  /**
-   * Calcula a média dos estudantes.
-   */
-  public calculateAverageStudents(): void {
+  public createDailyReport(
+    description: string,
+    classRoomWorkload: Workload
+  ): { dailyId: string } | null {
+    try {
+      const workloadDisciplinePraticalTotal =
+        this.discipline.workload.getPratical();
+      const workloadDisciplineTheoricalTotal =
+        this.discipline.workload.getTheorical();
+
+      if (classRoomWorkload.getPratical() > workloadDisciplinePraticalTotal) {
+        throw new Error("Pratical workload is greater than discipline");
+      }
+
+      if (classRoomWorkload.getTheorical() > workloadDisciplineTheoricalTotal) {
+        throw new Error("Theorical workload is greater than discipline");
+      }
+
+      const daily = new DailyReport(description, classRoomWorkload);
+      this.dailyReports.push(daily);
+
+      return { dailyId: daily.getId() };
+    } catch (error: any) {
+      console.error("Daily cannot be created becouse: ", error.message);
+      return null;
+    }
+  }
+
+  private calculateAverageStudents(): void {
     this.students.forEach((student) => {
       const sum = student.grade.reduce((acc, grade) => acc + grade, 0);
       const average = sum / student.grade.length;
@@ -124,14 +138,19 @@ export class ClassRoom extends Entity {
         ? `The Student approved: with grade ${average} and worload ${workloadPercent}%`
         : `The Student was not approved: grade ${average} and worload ${workloadPercent}%`;
     });
-
-    this.conclusedAt = new Date();
   }
 
-  /**
-   * Mostra a nota final dos estudantes.
-   */
-  public showTheFinalGrade(): void {
+  public endClass(): void {
+    try {
+      this.calculateAverageStudents();
+      this.conclusedAt = new Date();
+      this.showTheBulletin();
+    } catch (error: any) {
+      console.error("The class is not finished", error.message);
+    }
+  }
+
+  private showTheBulletin(): void {
     if (this.conclusedAt) {
       this.students.forEach((student) => {
         console.log(`
