@@ -1,38 +1,56 @@
-# Boilerplate Node Typescript
-This project is starter template for TypeScript. For personal projects and teaching, providing a minimum structure. Acess: https://github.com/christiancesar/christiancesar-boilerplate-node-typescript
-
-```json
-//package.json
-{
-  //...
-  "scripts": {
-    "dev:server": "node --no-warnings=ExperimentalWarning --loader ts-node/esm src/index.ts",
-    "test": "vitest run",
-    "test:watch": "vitest --watch",
-    "test:cov": "vitest run --coverage"
-  },
-  "dependencies": {
-    "@types/express": "^4.17.21",
-    "cors": "^2.8.5",
-    "crypto": "^1.0.1"
-  },
-  "devDependencies": {
-    "@swc/core": "^1.7.18",
-    "@swc/helpers": "^0.5.12",
-    "@types/cors": "^2.8.12",
-    "@types/express": "^4.17.21",
-    "express": "^4.19.2",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.5.4",
-    "vite-tsconfig-paths": "^5.0.1",
-    "vitest": "^2.0.5"
-  }
-}
-```
-
 # My University 
-The purpose of the project is to present the Fundamentals of Software Engineering, giving students the perception of evolution after having completed an assessment of functional and non-functional requirements.
+O objetivo do projeto é apresentar os Fundamentos da Engenharia de Software, dando aos alunos a percepção da evolução após terem concluído uma avaliação de requisitos funcionais e não funcionais.
 
-The next step is to use class diagrams and use cases for future coding, testing, and design and architecture patterns, thus applying all the basic concepts of Software Engineering.
+O próximo passo é usar diagramas de classes e casos de uso para codificação futura, testes e padrões de design e arquitetura, aplicando assim todos os conceitos básicos da Engenharia de Software.
 
-![diagram class](./assets/class-diagram.png)
+## Para rodar o projeto (Windows)
+
+### Requisitos
+
+Metodo 1:
+- [Node.js](https://nodejs.org/en/) Faça o download e instale o Node.js
+- [Git](https://git-scm.com/) Faça o download e instale o Git
+- [Visual Studio Code](https://code.visualstudio.com/) Faça o download e instale o Visual Studio Code
+- [Windows Terminal](https://www.microsoft.com/pt-br/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab) 
+
+- Você pode baixar facilmente na Microsoft Store a maioria destes programas.
+
+Metodo 2:
+- [Instalação Automatizada](https://github.com/christiancesar/setup-env-development) Baixe o repositorio clicando em `Code`, descopacte o arquivo zip e execute o arquivo `step-one.ps1` ao finalizar a instalação execute `step-two.ps2`, todos como administrador.
+
+### Baixar e rodar o projeto
+
+Método 1:
+- Crie uma pasta dentro do seu diretório de preferência. Exemplo: `Documentos/Projetos`
+- Dentro da pasta `Projetos` clique com o botão direito do mouse e selecione a opção `Abir no terminal`
+- Ao abrir o terminal, execute o comando `git clone https://github.com/christiancesar/my-university-oop.git`
+- Após o download do projeto, execute o comando `cd my-university-oop`
+- Execute o comando `npm install`
+- Execute o comando `npm dev`
+- Pronto! o projeto estará rodando e mostrará informações em seu terminal.
+- Para acessar os codigos do projeto para que você pode visualizar e editar, abra o Visual Studio Code e clique em `Arquivo > Abrir Pasta` e selecione a pasta `my-university-oop` que foi baixada. Ou ainda em seu terminal execute o comando `code .` o projeto será aberto no Visual Studio Code.
+
+Método 2:
+- Baixe o projeto em https://github.com/christiancesar/my-university-oop.git, no repositorio clique em Code e faça o download do arquivo zip.
+- Descompacte o arquivo zip em uma pasta de sua preferência.
+- Dentro da pasta onde o projeto foi descompactado clique com o botão direito do mouse e selecione a opção `Abir no terminal`, irá abrir no diretorio do projeto.
+- Execute o comando `npm install`
+- Execute o comando `npm dev`
+- Pronto! o projeto estará rodando e mostrará informações em seu terminal.
+- Para acessar os codigos do projeto para que você pode visualizar e editar, abra o Visual Studio Code e clique em `Arquivo > Abrir Pasta` e selecione a pasta `my-university-oop` que foi baixada. Ou ainda em seu terminal execute o comando `code .` o projeto será aberto no Visual Studio Code.
+
+## Diagrama de Classes
+
+O diagrama de classes é uma representação gráfica das classes de um sistema e dos relacionamentos entre elas. Ele é um dos diagramas mais populares da UML e é usado para modelar a estrutura de um sistema.
+![Diagrama de Classes](./docs/entities_diagram.png)
+
+## Organização do Projeto
+
+- `src/` - Diretório onde se encontra os arquivos de código fonte do projeto.
+- `src/entities/` - Diretório onde se encontra as classes de entidades do projeto.
+- `src/entities/inheritance-examples/` - Diretório onde se encontra os mais exemplos de herança.
+- `src/factories/` - Diretório onde se encontra as classes de fábricas do projeto.
+- `src/repositories/` - Diretório onde se encontra as classes de repositórios do projeto.
+- `src/seeds/` - Diretório onde se encontra as classes de sementes do projeto.
+- `tests/` - Diretório onde se encontra os arquivos de testes do projeto.
+
