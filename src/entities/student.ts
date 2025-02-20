@@ -1,40 +1,50 @@
-import { Discipline } from "./discipline.js";
-import { Entity } from "./entity.js";
+/**
+ * Classe que representa um estudante.
+ */
+import { Person } from "./person.js";
 
-export class Student extends Entity {
-  private name: string;
-  private email: string;
-  private registration: string;
-  constructor(name: string, id?: string) {
-    super(id);
+export class Student extends Person {
+  /**
+   * Construtor da classe Student.
+   * @param name - Nome do estudante.
+   * @param cpf - CPF do estudante.
+   * @param birthday - Data de nascimento do estudante.
+   * @param Id - Id opcional do estudante.
+   */
+  constructor(name: string, cpf: string, birthday: Date, id?: string) {
+    super(name, cpf, birthday, id);
     this.name = name;
-    this.email = this.createEmailInstitional(name);
-    this.registration = this.createNumberRegistration();
+    this.email = this.createEmailInstitional();
   }
 
-  private createNumberRegistration(): string {
-    const year = new Date().getFullYear();
-    const datenumber = new Date().getTime();
-    return `${year}${datenumber}`;
+  /**
+   * Cria o email institucional do estudante.
+   * @returns O email institucional.
+   */
+  public createEmailInstitional(): string {
+    const names = this.getFirstAndLastName();
+
+    if (names) {
+      const { firstName, lastName } = names;
+      return `${firstName.toLowerCase()}.${lastName.toLowerCase()}@aluno.ufr.edu.br`;
+    }
+
+    return "";
   }
 
-  private createEmailInstitional(name: string): string {
-    const regex = /^(\w+).*?(\w+)$/;
-    const match = name.match(regex);
-    const firstName = match ? match[1] : "";
-    const lastName = match ? match[2] : "";
-    return `${firstName.toLowerCase()}.${lastName.toLowerCase()}@aluno.ufr.edu.br`;
-  }
-
-  public getName(): string {
-    return this.name;
-  }
-
-  public getEmail(): string {
-    return this.email;
-  }
-
-  public getRegistration(): string {
-    return this.registration;
+  /**
+   * Obtém todas as informações do estudante.
+   * @returns Um objeto contendo todas as informações do estudante.
+   */
+  public getAllInformation<T>(): T {
+    return Object.assign(this, {
+      name: this.name,
+      cpf: this.cpf,
+      email: this.email,
+      registration: this.registration,
+      age: this.age,
+      birthday: this.birthday,
+      address: this.address,
+    }) as T;
   }
 }
