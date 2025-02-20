@@ -1,3 +1,4 @@
+import { Daily } from "./daily.js";
 import { Discipline } from "./discipline.js";
 import { Entity } from "./entity.js";
 import { StudentOfDiscipline } from "./student-discipline.js";
@@ -5,24 +6,11 @@ import { Student } from "./student.js";
 import { Teacher } from "./teacher.js";
 import { Workload } from "./workload.js";
 
-class DailyReport extends Entity {
-  description: string;
-  classRoomWorkload: Workload;
-  private createdAt: Date;
-
-  constructor(description: string, classRoomWorkload: Workload, id?: string) {
-    super(id);
-    this.description = description;
-    this.classRoomWorkload = classRoomWorkload;
-    this.createdAt = new Date();
-  }
-}
-
 export class ClassRoom extends Entity {
   private discipline: Discipline;
   private teacher: Teacher;
   private students: StudentOfDiscipline[];
-  private dailyReports: DailyReport[];
+  private dailyReports: Daily[];
   private createdAt: Date;
   private updatedAt?: Date | null;
   private conclusedAt?: Date | null;
@@ -114,7 +102,7 @@ export class ClassRoom extends Entity {
         throw new Error("Theorical workload is greater than discipline");
       }
 
-      const daily = new DailyReport(description, classRoomWorkload);
+      const daily = new Daily(description, classRoomWorkload);
       this.dailyReports.push(daily);
 
       return { dailyId: daily.getId() };
