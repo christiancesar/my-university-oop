@@ -1,6 +1,6 @@
 import { Address } from "../../model/address.js";
 import { CreateAddress } from "../dtos/create-address-dto.js";
-import { FindAddressById } from "../dtos/find-address-by-id.js";
+import { FindAddressById } from "../dtos/find-address-by-id-dto.js";
 
 export interface IAddressesRepository {
   createAddress(data: CreateAddress): Address;

@@ -4,7 +4,7 @@ import { SQLite } from "../../database/providers/sqlite.js";
 import { University } from "../../model/university.js";
 import { CreateUniversity } from "../dtos/create-university-dto.js";
 import { IUniversitiesRepository } from "../interfaces/universities-repository.js";
-import { FindUniversityById } from "../dtos/find-university-by-id.js";
+import { FindUniversityById } from "../dtos/find-university-by-id-dto.js";
 
 export class UniversitiesRepositorySqlite implements IUniversitiesRepository {
   constructor(private database: DatabaseSync) {
@@ -29,7 +29,7 @@ export class UniversitiesRepositorySqlite implements IUniversitiesRepository {
 
       return new University(university);
     } catch (error) {
-      throw new Error("Erro ao criar universidade");
+      throw new Error("Error while create university.", { cause: error });
     }
   }
 
@@ -43,7 +43,7 @@ export class UniversitiesRepositorySqlite implements IUniversitiesRepository {
 
       return university ? new University(university) : undefined;
     } catch (error) {
-      throw new Error("Erro ao buscar universidade");
+      throw new Error("Error while find university by id.", { cause: error });
     }
   }
 }

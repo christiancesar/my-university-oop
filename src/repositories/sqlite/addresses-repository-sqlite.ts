@@ -3,11 +3,11 @@ import { DatabaseSync } from "node:sqlite";
 import { SQLite } from "../../database/providers/sqlite.js";
 import { University } from "../../model/university.js";
 import { CreateUniversity } from "../dtos/create-university-dto.js";
-import { FindUniversityById } from "../dtos/find-university-by-id.js";
+import { FindUniversityById } from "../dtos/find-university-by-id-dto.js";
 import { IAddressesRepository } from "../interfaces/addresses-repository.js";
 import { Address } from "../../model/address.js";
 import { CreateAddress } from "../dtos/create-address-dto.js";
-import { FindAddressById } from "../dtos/find-address-by-id.js";
+import { FindAddressById } from "../dtos/find-address-by-id-dto.js";
 
 export class AddressesRepositorySqlite implements IAddressesRepository {
   constructor(private database: DatabaseSync) {
@@ -34,7 +34,7 @@ export class AddressesRepositorySqlite implements IAddressesRepository {
 
       return new Address(address);
     } catch (error) {
-      throw new Error("Erro ao criar universidade");
+      throw new Error("Error while create address.", { cause: error });
     }
   }
 
@@ -46,7 +46,7 @@ export class AddressesRepositorySqlite implements IAddressesRepository {
 
       return address ? new Address(address) : undefined;
     } catch (error) {
-      throw new Error("Erro ao buscar universidade");
+      throw new Error("Error while find address by id.", { cause: error });
     }
   }
 }
