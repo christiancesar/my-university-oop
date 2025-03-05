@@ -32,7 +32,7 @@ export class UniversityRepositoriSqlite implements IUniversityRepository {
     }
   }
 
-  selectUniversityById(universityId: string): University {
+  findUniversityById({ universityId }: { universityId: string }): University {
     try {
       const university = this.database
         .prepare("SELECT * FROM universities WHERE id = ?")
