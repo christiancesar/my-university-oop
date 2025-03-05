@@ -2,7 +2,7 @@ import { enviroment } from "../../utils/env/envinroment.js";
 import { Connection } from "./connection.js";
 import { DatabaseSync } from "node:sqlite";
 
-class SQLite {
+export class SQLite {
   private static instance: DatabaseSync | null;
 
   private constructor() {}

@@ -1,4 +1,4 @@
-import { Student } from "../entities/student.js";
+import { Student } from "../../entities/student.js";
 
 /**
  * Repositório de Estudantes em Memória

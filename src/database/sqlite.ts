@@ -2,6 +2,7 @@ import { DatabaseSync } from "node:sqlite";
 import path from "node:path";
 import fs from "node:fs";
 import { randomUUID } from "node:crypto";
+import { University } from "../model/university.js";
 
 type SQLiteMaster = {
   type: string;
@@ -42,10 +43,11 @@ const loadSqlPerson = fs.readFileSync(
   path.resolve(__dirname, "sql", "person.sql"),
   "utf-8"
 );
-
 const database = new DatabaseSync(sqlite_db_path);
 
-const tables = ["addresses", "universities", "persons"];
+const tables = ["addresses", "universities", "persons"] as const;
+
+type TableName = "addresses" | "universities" | "persons";
 
 const verifyTablesSql = database.prepare(
   "SELECT * FROM sqlite_master WHERE type='table'"
@@ -78,16 +80,24 @@ if (verifyTablesSqlResult.length === 0) {
   });
 }
 const createAddressBaseQuery = database.prepare(
-  "INSERT INTO addresses ( id, street, number, complement, neighborhood, city, state, country, zipcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+  "INSERT INTO addresses ( id, street, number, complement, neighborhood, city, state, country, zipcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) "
 );
 
 const createUniversityBaseQuery = database.prepare(
+  "INSERT INTO universities (id, name) VALUES (?, ?) RETURNING *"
+);
+
+const createUniversityWithAddressIdBaseQuery = database.prepare(
   "INSERT INTO universities (id, name, address_id) VALUES (?, ?, ?)"
 );
 
-function selectLastRowIdBase<T>(index: number | bigint): T | undefined {
-  return database
-    .prepare(`SELECT * FROM addresses WHERE rowid = ${index}`)
+export function selectLastRowIdBaseSql<T>(
+  instace: DatabaseSync,
+  tableName: TableName,
+  rowId: number | bigint
+): T {
+  return instace
+    .prepare(`SELECT * FROM ${tableName} WHERE rowid = ${rowId}`)
     .get() as T;
 }
 
@@ -115,22 +125,41 @@ const createAddressUniversityQuery = createAddressBaseQuery.run(
 /**
  * Select com abstração, fazendo uso de Generics
  */
-const getCreatedAddress = selectLastRowIdBase<AddressResult>(
+
+const getCreatedAddress = selectLastRowIdBaseSql<AddressResult>(
+  database,
+  "addresses",
   createAddressUniversityQuery.lastInsertRowid
 );
 
 if (getCreatedAddress) {
-  const createUniversityQuery = createUniversityBaseQuery.run(
+  const createUniversityWithAddressIdQuery =
+    createUniversityWithAddressIdBaseQuery.run(
+      randomUUID(),
+      "Universidade Federal de Rondonópolis",
+      null
+    );
+
+  const university = selectLastRowIdBaseSql<any>(
+    database,
+    "universities",
+    createUniversityWithAddressIdQuery.lastInsertRowid
+  );
+
+  console.log("result 1:", university);
+
+  const result = createUniversityBaseQuery.get(
     randomUUID(),
-    "Universidade Federal de Rondonópolis",
-    getCreatedAddress.id.toString()
+    "Universidade Federal de Rondonópolis"
   );
 
-  const university = selectLastRowIdBase<AddressResult>(
-    createAddressUniversityQuery.lastInsertRowid
-  );
+  // const university2 = selectLastRowIdBaseSql<any>(
+  //   database,
+  //   "universities",
+  //   result.lastInsertRowid
+  // );
 
-  console.log(university);
+  console.log("result 2:", result);
 }
 
 // createAddressBaseQuery.run(

@@ -1,6 +1,6 @@
 import { Discipline } from "../src/entities/discipline.js";
 import { DisciplineFactory } from "../src/factories/discipline-factory.js";
-import { InMemoryDisciplinesRepository } from "../src/repositories/in-memory-disciplines-repository.js";
+import { InMemoryDisciplinesRepository } from "../src/repositories/in-memory/in-memory-disciplines-repository.js";
 import { DisciplinesSeed } from "../src/seeds/diciplines-seed.js";
 
 describe("Disciplines", () => {
