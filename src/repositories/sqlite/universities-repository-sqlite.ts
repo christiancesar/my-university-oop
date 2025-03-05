@@ -3,9 +3,10 @@ import { DatabaseSync } from "node:sqlite";
 import { SQLite } from "../../database/providers/sqlite.js";
 import { University } from "../../model/university.js";
 import { CreateUniversity } from "../dtos/create-university-dto.js";
-import { IUniversityRepository } from "../interfaces/university-repository.js";
+import { IUniversitiesRepository } from "../interfaces/universities-repository.js";
+import { FindUniversityById } from "../dtos/find-university-by-id.js";
 
-export class UniversityRepositoriSqlite implements IUniversityRepository {
+export class UniversitiesRepositorySqlite implements IUniversitiesRepository {
   constructor(private database: DatabaseSync) {
     this.database = SQLite.getInstance();
   }
@@ -26,19 +27,21 @@ export class UniversityRepositoriSqlite implements IUniversityRepository {
         data.addressId ? data.addressId : null
       ) as University;
 
-      return university;
+      return new University(university);
     } catch (error) {
       throw new Error("Erro ao criar universidade");
     }
   }
 
-  findUniversityById({ universityId }: { universityId: string }): University {
+  findUniversityById({
+    universityId,
+  }: FindUniversityById): University | undefined {
     try {
       const university = this.database
         .prepare("SELECT * FROM universities WHERE id = ?")
-        .get(universityId) as University;
+        .get(universityId) as University | undefined;
 
-      return university;
+      return university ? new University(university) : undefined;
     } catch (error) {
       throw new Error("Erro ao buscar universidade");
     }

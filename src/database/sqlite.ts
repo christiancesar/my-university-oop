@@ -160,6 +160,11 @@ if (getCreatedAddress) {
   // );
 
   console.log("result 2:", result);
+
+  const selectUniversityWithIdNotExist = database
+    .prepare(`SELECT * FROM universities where id = ?`)
+    .get("c18c4153-4b1d-4bcc-b5b6-0216834d7eeb");
+  console.log(selectUniversityWithIdNotExist);
 }
 
 // createAddressBaseQuery.run(
