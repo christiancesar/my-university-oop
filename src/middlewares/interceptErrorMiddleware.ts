@@ -1,0 +1,33 @@
+import { ZodError } from "zod";
+import { AppError } from "../errors/AppError.js";
+import { NextFunction, Request, Response } from "express";
+
+export function interceptErrorMiddleware(
+  err: Error,
+  request: Request,
+  response: Response,
+  _: NextFunction
+) {
+  if (err instanceof AppError) {
+    response.status(err.statusCode).json({
+      status: "error",
+      code: err.code,
+      message: err.message,
+    });
+  }
+
+  if (err instanceof ZodError) {
+    response.status(400).json({
+      status: "error",
+      message: "Validation error.",
+      issues: err.format(),
+    });
+  }
+
+  console.error(err);
+
+  response.status(500).json({
+    status: "error",
+    message: "Internal server error",
+  });
+}

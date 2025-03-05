@@ -21,7 +21,7 @@ export class ClassRoomFactory {
   static make(classRoom?: ClassRoomFactoryParams): ClassRoom {
     const discipline = classRoom?.discipline ?? DisciplineFactory.make();
     const teacher = classRoom?.teacher ?? TeacherFactory.make();
-    const classRoomCreated = new ClassRoom(discipline, teacher);
+    const classRoomCreated = new ClassRoom("", discipline, teacher);
 
     return classRoomCreated;
   }

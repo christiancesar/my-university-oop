@@ -11,6 +11,7 @@ import { Workload } from "./workload.js";
  * Ela herda da classe Entity e contém informações sobre a disciplina, professor, estudantes e relatórios diários.
  */
 export class ClassRoom extends Entity {
+  private room: string;
   private discipline: Discipline;
   private teacher: Teacher;
   private students: StudentOfDiscipline[];
@@ -25,8 +26,14 @@ export class ClassRoom extends Entity {
    * @param teacher - O professor responsável pela sala de aula.
    * @param id - O ID da sala de aula (opcional).
    */
-  constructor(discipline: Discipline, teacher: Teacher, id?: string) {
+  constructor(
+    room: string,
+    discipline: Discipline,
+    teacher: Teacher,
+    id?: string
+  ) {
     super(id);
+    this.room = room;
     this.teacher = teacher;
     this.discipline = discipline;
     this.students = [];
