@@ -7,7 +7,7 @@ O próximo passo é usar diagramas de classes e casos de uso para codificação 
 
 ### Requisitos
 
-Metodo 1:
+Método 1:
 - [Node.js](https://nodejs.org/en/) Faça o download e instale o Node.js
 - [Git](https://git-scm.com/) Faça o download e instale o Git
 - [Visual Studio Code](https://code.visualstudio.com/) Faça o download e instale o Visual Studio Code
@@ -15,8 +15,8 @@ Metodo 1:
 
 - Você pode baixar facilmente na Microsoft Store a maioria destes programas.
 
-Metodo 2:
-- [Instalação Automatizada](https://github.com/christiancesar/setup-env-development) Baixe o repositorio clicando em `Code`, descopacte o arquivo zip e execute o arquivo `step-one.ps1` ao finalizar a instalação execute `step-two.ps2`, todos como administrador.
+Método 2:
+- [Instalação Automatizada](https://github.com/christiancesar/setup-env-development) Baixe o repositório clicando em `Code`, descompacte o arquivo zip e execute o arquivo `step-one.ps1` ao finalizar a instalação execute `step-two.ps2`, todos como administrador.
 
 ### Baixar e rodar o projeto
 
@@ -28,16 +28,26 @@ Método 1:
 - Execute o comando `npm install`
 - Execute o comando `npm dev`
 - Pronto! o projeto estará rodando e mostrará informações em seu terminal.
-- Para acessar os codigos do projeto para que você pode visualizar e editar, abra o Visual Studio Code e clique em `Arquivo > Abrir Pasta` e selecione a pasta `my-university-oop` que foi baixada. Ou ainda em seu terminal execute o comando `code .` o projeto será aberto no Visual Studio Code.
+- Para acessar os códigos do projeto para que você pode visualizar e editar, abra o Visual Studio Code e clique em `Arquivo > Abrir Pasta` e selecione a pasta `my-university-oop` que foi baixada. Ou ainda em seu terminal execute o comando `code .` o projeto será aberto no Visual Studio Code.
 
 Método 2:
-- Baixe o projeto em https://github.com/christiancesar/my-university-oop.git, no repositorio clique em Code e faça o download do arquivo zip.
+- Baixe o projeto em https://github.com/christiancesar/my-university-oop.git, no repositório clique em Code e faça o download do arquivo zip.
 - Descompacte o arquivo zip em uma pasta de sua preferência.
-- Dentro da pasta onde o projeto foi descompactado clique com o botão direito do mouse e selecione a opção `Abir no terminal`, irá abrir no diretorio do projeto.
+- Dentro da pasta onde o projeto foi descompactado clique com o botão direito do mouse e selecione a opção `Abir no terminal`, irá abrir no diretório do projeto.
 - Execute o comando `npm install`
 - Execute o comando `npm dev`
 - Pronto! o projeto estará rodando e mostrará informações em seu terminal.
-- Para acessar os codigos do projeto para que você pode visualizar e editar, abra o Visual Studio Code e clique em `Arquivo > Abrir Pasta` e selecione a pasta `my-university-oop` que foi baixada. Ou ainda em seu terminal execute o comando `code .` o projeto será aberto no Visual Studio Code.
+- Para acessar os códigos do projeto para que você pode visualizar e editar, abra o Visual Studio Code e clique em `Arquivo > Abrir Pasta` e selecione a pasta `my-university-oop` que foi baixada. Ou ainda em seu terminal execute o comando `code .` o projeto será aberto no Visual Studio Code.
+
+## Tipos de scripts
+Dentro do projeto encontram-se os seguintes scripts:
+
+![Scripts](./docs/scripts.png)
+
+- `npm run dev` - Inicia o projeto executando o arquivo `index.js`, que tem exemplos de Programação Orientada a Objetos.
+- `npm run dev:server`: Inicia o projeto executando o arquivo `server.js`, que tem exemplos de uma aplicação no formatado Cliente/Servidor, no qual é aplicado alguns Padrões de Projetos e conceitos como SOLID.
+- `npm run dev:sqlite-playground`: Inicia o projeto executando o arquivo `sqlite-playground.js`, que tem exemplos de como utilizar o banco de dados SQLite. Local onde pode testar comandos SQL com o Nodejs e verificar o retorno.
+- `npm run test` - Inicia os testes do projeto.
 
 ## Diagrama de Classes
 

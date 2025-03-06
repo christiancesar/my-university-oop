@@ -15,7 +15,7 @@
   "scripts": {
     "dev": "node --no-warnings=ExperimentalWarning --loader ts-node/esm src/index.ts",
     "dev:server": "node --no-warnings=ExperimentalWarning --loader ts-node/esm src/server.ts",
-    "dev:sqlite": "node --no-warnings=ExperimentalWarning --loader ts-node/esm src/database/sqlite.ts",
+    "dev:sqlite-playground": "node --no-warnings=ExperimentalWarning --loader ts-node/esm src/database/sqlite-playground.ts",
     "test": "vitest run",
     "test:watch": "vitest --watch",
     "test:cov": "vitest run --coverage"

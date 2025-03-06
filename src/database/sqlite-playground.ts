@@ -1,8 +1,7 @@
-import { DatabaseSync } from "node:sqlite";
-import path from "node:path";
-import fs from "node:fs";
 import { randomUUID } from "node:crypto";
-import { University } from "../model/university.js";
+import fs from "node:fs";
+import path from "node:path";
+import { DatabaseSync } from "node:sqlite";
 
 type SQLiteMaster = {
   type: string;
@@ -165,6 +164,13 @@ if (getCreatedAddress) {
     .prepare(`SELECT * FROM universities where id = ?`)
     .get("c18c4153-4b1d-4bcc-b5b6-0216834d7eeb");
   console.log(selectUniversityWithIdNotExist);
+
+  const tableName = "universities";
+  const tableExistResult = database
+    .prepare("SELECT name FROM sqlite_master WHERE type='table' AND name=?")
+    .get(tableName);
+
+  console.log(`Table ${tableName} exist?`, tableExistResult);
 }
 
 // createAddressBaseQuery.run(

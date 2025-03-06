@@ -5,4 +5,5 @@ export type CreateDiscipline = {
   pre_requisite_id: string | null;
   workload_pratical: number;
   workload_theoretical: number;
+  university_id: string | null;
 };

@@ -1,22 +1,13 @@
 import { randomUUID } from "node:crypto";
-import { DatabaseSync } from "node:sqlite";
-import { SQLite } from "../../database/providers/sqlite.js";
-import { University } from "../../model/university.js";
-import { CreateUniversity } from "../dtos/create-university-dto.js";
-import { FindUniversityById } from "../dtos/find-university-by-id-dto.js";
-import { IAddressesRepository } from "../interfaces/addresses-repository.js";
-import { Address } from "../../model/address.js";
-import { CreateAddress } from "../dtos/create-address-dto.js";
-import { FindAddressById } from "../dtos/find-address-by-id-dto.js";
+import { Address } from "../../../../model/address.js";
+import { CreateAddress } from "../../dtos/create-address-dto.js";
+import { FindAddressById } from "../../dtos/find-address-by-id-dto.js";
+import { sqlite } from "../../../providers/sqlite-connection-database.js";
 
-export class AddressesRepositorySqlite implements IAddressesRepository {
-  constructor(private database: DatabaseSync) {
-    this.database = SQLite.getInstance();
-  }
-
+export class AddressesRepositorySqlite {
   createAddress(data: CreateAddress): Address {
     try {
-      const createAddressBaseQuery = this.database.prepare(
+      const createAddressBaseQuery = sqlite.prepare(
         "INSERT INTO addresses ( id, street, number, complement, neighborhood, city, state, country, zipcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING *"
       );
 
@@ -40,7 +31,7 @@ export class AddressesRepositorySqlite implements IAddressesRepository {
 
   findAddressById({ addressId }: FindAddressById): Address | undefined {
     try {
-      const address = this.database
+      const address = sqlite
         .prepare("SELECT * FROM addresses WHERE id = ?")
         .get(addressId) as Address | undefined;
 

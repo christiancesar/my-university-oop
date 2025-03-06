@@ -1,4 +1,4 @@
-import { Discipline } from "../../entities/discipline.js";
+import { Discipline } from "../../../entities/discipline.js";
 
 /**
  * Repositório de Disciplinas em Memória

@@ -1,4 +1,4 @@
-import { ClassRoom } from "../../entities/class-room.js";
+import { ClassRoom } from "../../../entities/class-room.js";
 
 /**
  * Repositório de Salas de Aula em Memória
