@@ -56,11 +56,112 @@ O diagrama de classes é uma representação gráfica das classes de um sistema 
 
 ## Organização do Projeto
 
-- `src/` - Diretório onde se encontra os arquivos de código fonte do projeto.
-- `src/entities/` - Diretório onde se encontra as classes de entidades do projeto.
-- `src/entities/inheritance-examples/` - Diretório onde se encontra os mais exemplos de herança.
-- `src/factories/` - Diretório onde se encontra as classes de fábricas do projeto.
-- `src/repositories/` - Diretório onde se encontra as classes de repositórios do projeto.
-- `src/seeds/` - Diretório onde se encontra as classes de sementes do projeto.
-- `tests/` - Diretório onde se encontra os arquivos de testes do projeto.
+```text
+MY-UNIVERSITY-OOP
+ ┣ assets
+ ┃  ┣ class-diagram.png
+ ┃  ┗ materias.csv
+ ┣ docs
+ ┃  ┣ documentation.md
+ ┃  ┣ entities_diagram.png
+ ┃  ┣ scripts.png
+ ┃  ┗ src_diagram.png
+ ┣ src
+ ┃  ┣ database
+ ┃  ┃  ┣ providers
+ ┃  ┃  ┃  ┣ connection.ts
+ ┃  ┃  ┃  ┗ sqlite-connection-database.ts
+ ┃  ┃  ┣ repositories
+ ┃  ┃  ┃  ┣ dtos
+ ┃  ┃  ┃  ┃  ┣ create-address-dto.ts
+ ┃  ┃  ┃  ┃  ┣ create-discipline-dto.ts
+ ┃  ┃  ┃  ┃  ┣ create-university-dto.ts
+ ┃  ┃  ┃  ┃  ┣ find-address-by-id-dto.ts
+ ┃  ┃  ┃  ┃  ┣ find-discipline-by-id-dto.ts
+ ┃  ┃  ┃  ┃  ┗ find-university-by-id-dto.ts
+ ┃  ┃  ┃  ┣ in-memory
+ ┃  ┃  ┃  ┃  ┣ in-memory-class-room-repository.ts
+ ┃  ┃  ┃  ┃  ┣ in-memory-disciplines-repository.ts
+ ┃  ┃  ┃  ┃  ┗ in-memory-students-repository.ts
+ ┃  ┃  ┃  ┣ interfaces
+ ┃  ┃  ┃  ┃  ┣ addresses-repository.ts
+ ┃  ┃  ┃  ┃  ┣ disciplines-repository.ts
+ ┃  ┃  ┃  ┃  ┗ universities-repository.ts
+ ┃  ┃  ┃  ┣ pgsql
+ ┃  ┃  ┃  ┃  ┗ universities-repository-pg.ts
+ ┃  ┃  ┃  ┗ sqlite
+ ┃  ┃  ┃     ┣ helper
+ ┃  ┃  ┃     ┃  ┗ verify-integrity-database-tables.ts
+ ┃  ┃  ┃     ┗ implementations
+ ┃  ┃  ┃        ┣ addresses-repository-sqlite.ts
+ ┃  ┃  ┃        ┣ disciplines-repository-sqlite.ts
+ ┃  ┃  ┃        ┗ universities-repository-sqlite.ts
+ ┃  ┃  ┣ sql
+ ┃  ┃  ┃  ┣ address.sql
+ ┃  ┃  ┃  ┣ class-room-to-students.sql
+ ┃  ┃  ┃  ┣ class-room-to-teachers.sql
+ ┃  ┃  ┃  ┣ class-room.sql
+ ┃  ┃  ┃  ┣ dailies.sql
+ ┃  ┃  ┃  ┣ discipline.sql
+ ┃  ┃  ┃  ┣ person.sql
+ ┃  ┃  ┃  ┣ student.sql
+ ┃  ┃  ┃  ┣ teacher.sql
+ ┃  ┃  ┃  ┣ university_to_students.sql
+ ┃  ┃  ┃  ┣ university_to_teachers.sql
+ ┃  ┃  ┃  ┗ university.sql
+ ┃  ┃  ┗ sqlite-playground.ts
+ ┃  ┣ entities
+ ┃  ┃  ┣ inheritance-examples
+ ┃  ┃  ┃  ┣ index.ts
+ ┃  ┃  ┃  ┣ student-inheritance.ts
+ ┃  ┃  ┃  ┣ teacher-inheritance.ts
+ ┃  ┃  ┃  ┗ user.ts
+ ┃  ┃  ┣ address.ts
+ ┃  ┃  ┣ class-room.ts
+ ┃  ┃  ┣ daily.ts
+ ┃  ┃  ┣ discipline.ts
+ ┃  ┃  ┣ entity.ts
+ ┃  ┃  ┣ person.ts
+ ┃  ┃  ┣ student-discipline.ts
+ ┃  ┃  ┣ student.ts
+ ┃  ┃  ┣ teacher.ts
+ ┃  ┃  ┗ workload.ts
+ ┃  ┣ errors
+ ┃  ┃  ┗ AppError.ts
+ ┃  ┣ factories
+ ┃  ┃  ┣ class-room-factory.ts
+ ┃  ┃  ┣ discipline-factory.ts
+ ┃  ┃  ┣ person-factory.ts
+ ┃  ┃  ┣ student-factory.ts
+ ┃  ┃  ┗ teacher-factory.ts
+ ┃  ┣ middlewares
+ ┃  ┃  ┗ interceptErrorMiddleware.ts
+ ┃  ┣ model
+ ┃  ┃  ┣ address.ts
+ ┃  ┃  ┣ discipline.ts
+ ┃  ┃  ┗ university.ts
+ ┃  ┣ seeds
+ ┃  ┃  ┣ diciplines-seed.ts
+ ┃  ┃  ┗ students-seed.ts
+ ┃  ┣ use-cases
+ ┃  ┃  ┗ create-university-use-case.ts
+ ┃  ┣ utils
+ ┃  ┃  ┗ env
+ ┃  ┃     ┗ environment.ts
+ ┃  ┣ index.ts
+ ┃  ┣ routes.ts
+ ┃  ┗ server.ts
+ ┣ tests
+ ┃  ┣ class-room.spec.ts
+ ┃  ┣ disciplines.spec.ts
+ ┃  ┗ students.spec.ts
+ ┣ .env
+ ┣ .gitignore
+ ┣ package-lock.json
+ ┣ package.json
+ ┣ readme.md
+ ┣ tsconfig.json
+ ┣ university.db
+ ┗ vitest.config.ts
 
+```
