@@ -8,7 +8,7 @@ export class CreateUniversityUseCase {
   }
 
   async execute({ name, addressId }: CreateUniversity): Promise<University> {
-    const university = this.universitiesRepository.createUniversity({
+    const university = await this.universitiesRepository.createUniversity({
       name,
       addressId,
     });
