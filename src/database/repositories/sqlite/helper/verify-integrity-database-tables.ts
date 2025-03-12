@@ -17,7 +17,7 @@ const tablesRecord: Table = {
   )`,
   universities: `CREATE TABLE IF NOT EXISTS universities (
     id TEXT PRIMARY KEY,
-    name TEXT NOT NULL,
+    name TEXT NOT NULL UNIQUE,
     address_id TEXT,
     FOREIGN KEY (address_id) REFERENCES addresses (id)
   )`,

@@ -12,6 +12,7 @@ import { University as UniversityEntity } from "../../../../entities/university.
 import { University as UniversityModel } from "../../../../model/university.js";
 import { Address as AddressModel } from "../../../../model/address.js";
 import { UniversityAddressMapper } from "./mappers/university-address-mapper.js";
+import { FindUniversityByName } from "../../dtos/find-university-by-name-dto.js";
 
 export class UniversitiesRepositorySqlite implements IUniversitiesRepository {
   async createUniversity(data: CreateUniversity): Promise<UniversityEntity> {
@@ -58,6 +59,28 @@ export class UniversitiesRepositorySqlite implements IUniversitiesRepository {
         : undefined;
     } catch (error) {
       throw new Error("Error while find university by id.", { cause: error });
+    }
+  }
+
+  async findUniversityByName({
+    name,
+  }: FindUniversityByName): Promise<UniversityEntity | undefined> {
+    try {
+      const university = sqlite
+        .prepare("SELECT u.* FROM universities u WHERE u.name = ?")
+        .get(name) as UniversityModel | undefined;
+
+      const address = university?.address_id
+        ? (sqlite
+            .prepare(`SELECT * FROM addresses WHERE id = ?`)
+            .get(university.address_id) as AddressModel)
+        : null;
+
+      return university
+        ? UniversityAddressMapper.toEntity({ address, university })
+        : undefined;
+    } catch (error) {
+      throw new Error("Error while find university by name.", { cause: error });
     }
   }
 
