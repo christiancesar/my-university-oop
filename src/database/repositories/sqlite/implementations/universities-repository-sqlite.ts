@@ -1,18 +1,18 @@
-import { randomUUID } from "node:crypto";
-import { sqlite } from "../../../providers/sqlite-connection-database.js";
-import { CreateUniversity } from "../../dtos/create-university-dto.js";
-import { FindUniversityById } from "../../dtos/find-university-by-id-dto.js";
-import { IUniversitiesRepository } from "../../interfaces/universities-repository.js";
-import { AppError } from "../../../../shared/errors/AppError.js";
+import { sqlite } from "@database/providers/sqlite-connection-database.js";
+import { CreateUniversity } from "@database/repositories/dtos/create-university-dto.js";
+import { FindUniversityById } from "@database/repositories/dtos/find-university-by-id-dto.js";
+import { FindUniversityByName } from "@database/repositories/dtos/find-university-by-name-dto.js";
 import {
   UpdateUniversity,
   UpdateUniversityAddress,
-} from "../../dtos/update-university-dto.js";
-import { University as UniversityEntity } from "../../../../entities/university.js";
-import { University as UniversityModel } from "../model/university.js";
+} from "@database/repositories/dtos/update-university-dto.js";
+import { University as UniversityEntity } from "@entities/university.js";
+import { AppError } from "@shared/errors/AppError.js";
+import { randomUUID } from "node:crypto";
+import { IUniversitiesRepository } from "../../interfaces/universities-repository.js";
 import { Address as AddressModel } from "../model/address.js";
+import { University as UniversityModel } from "../model/university.js";
 import { UniversityAddressMapper } from "./mappers/university-address-mapper.js";
-import { FindUniversityByName } from "../../dtos/find-university-by-name-dto.js";
 
 export class UniversitiesRepositorySqlite implements IUniversitiesRepository {
   async createUniversity(data: CreateUniversity): Promise<UniversityEntity> {

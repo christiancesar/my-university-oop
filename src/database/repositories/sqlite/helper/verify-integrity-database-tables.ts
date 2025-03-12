@@ -1,5 +1,5 @@
 import { DatabaseSync } from "node:sqlite";
-import { sqlite } from "../../../providers/sqlite-connection-database.js";
+import { sqlite } from "@database/providers/sqlite-connection-database.js";
 
 type Table = Record<string, string>;
 
