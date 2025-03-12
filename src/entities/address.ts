@@ -3,11 +3,22 @@
  */
 import { Entity } from "./entity.js";
 
+type AddressConstructorProps = {
+  id?: string;
+  street: string;
+  neighborhood: string;
+  number: string;
+  city: string;
+  state: string;
+  country: string;
+  zipCode: string;
+  complement?: string | null;
+};
 export class Address extends Entity {
   street: string;
   neighborhood: string;
   number: string;
-  complement?: string;
+  complement?: string | null;
   city: string;
   state: string;
   country: string;
@@ -25,17 +36,17 @@ export class Address extends Entity {
    * @param complement - Complemento opcional
    * @param id - Identificador opcional
    */
-  constructor(
-    street: string,
-    neighborhood: string,
-    number: string,
-    city: string,
-    state: string,
-    country: string,
-    zipCode: string,
-    complement?: string,
-    id?: string
-  ) {
+  constructor({
+    street,
+    neighborhood,
+    number,
+    city,
+    state,
+    country,
+    zipCode,
+    complement,
+    id,
+  }: AddressConstructorProps) {
     super(id);
     this.street = street;
     this.neighborhood = neighborhood;

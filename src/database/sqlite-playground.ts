@@ -171,6 +171,11 @@ if (getCreatedAddress) {
     .get(tableName);
 
   console.log(`Table ${tableName} exist?`, tableExistResult);
+
+  const selectUniversityAddressBaseQuery = database.prepare(
+    "SELECT u.*, a.* FROM universities u LEFT JOIN addresses a ON u.address_id = a.id WHERE u.id = 'fa57e5f7-fc57-470d-bf49-a6cdc170e882'"
+  );
+  console.log(selectUniversityAddressBaseQuery.get());
 }
 
 // createAddressBaseQuery.run(

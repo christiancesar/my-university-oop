@@ -13,9 +13,9 @@
   "author": "ccrs",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch --no-warnings --env-file=.env src/index.ts",
-    "dev:server": "tsx watch --no-warnings --env-file=.env src/server.ts",
-    "dev:sqlite-playground": "tsx watch --no-warnings --env-file=.env src/database/sqlite-playground.ts",
+    "dev": "tsx watch --no-warnings --env-file=.env --inspect-brk src/index.ts",
+    "dev:server": "tsx watch --no-warnings --env-file=.env --inspect-brk src/server.ts",
+    "dev:sqlite-playground": "tsx watch --no-warnings --env-file=.env --inspect-brk src/database/sqlite-playground.ts",
     "test": "vitest run",
     "test:watch": "vitest --watch",
     "test:cov": "vitest run --coverage"

@@ -4,13 +4,24 @@ import { UniversitiesRepositoryPg } from "./database/repositories/pgsql/universi
 import { UniversitiesRepositorySqlite } from "./database/repositories/sqlite/implementations/universities-repository-sqlite.js";
 import { FindUniversityUseCase } from "./use-cases/find-university-use-case.js";
 import { DeleteUniversityByIdUseCase } from "./use-cases/delete-university-use-case.js";
+import { CreateAddress } from "./database/repositories/dtos/create-address-dto.js";
+import { AddressesRepositorySqlite } from "./database/repositories/sqlite/implementations/addresses-repository-sqlite.js";
+import { CreateAddressUseCase } from "./use-cases/create-address-use-case.js";
+import { UpdateUniversityUseCase } from "./use-cases/update-university-use-case.js";
 
 export const routes = Router();
 
 const universitiesRepositorySQlite = new UniversitiesRepositorySqlite();
+const addressesRepository = new AddressesRepositorySqlite();
+
+const createAddressUseCase = new CreateAddressUseCase(addressesRepository);
+const updateUniversityUseCase = new UpdateUniversityUseCase(
+  universitiesRepositorySQlite
+);
 
 const createUniversity = new CreateUniversityUseCase(
-  universitiesRepositorySQlite
+  universitiesRepositorySQlite,
+  addressesRepository
 );
 
 const findUniversityById = new FindUniversityUseCase(
@@ -48,5 +59,20 @@ routes.delete(
       universityId,
     });
     response.status(204).json();
+  }
+);
+
+routes.patch(
+  "/universities/:universityId/address",
+  async (request: Request, response: Response) => {
+    const { universityId } = request.params;
+    const address = request.body as CreateAddress;
+
+    const newAddress = await createAddressUseCase.execute(address);
+    const universityUpdated = await updateUniversityUseCase.execute({
+      universityId,
+      addressId: newAddress.id,
+    });
+    response.json(universityUpdated);
   }
 );
