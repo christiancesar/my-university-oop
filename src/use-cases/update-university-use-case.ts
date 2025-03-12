@@ -1,6 +1,6 @@
 import { IUniversitiesRepository } from "../database/repositories/interfaces/universities-repository.js";
 import { University as UniversityEntity } from "../entities/university.js";
-import { AppError } from "../errors/AppError.js";
+import { AppError } from "../shared/errors/AppError.js";
 
 type UpdateUniversity = {
   universityId: string;

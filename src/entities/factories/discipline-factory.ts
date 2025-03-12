@@ -1,5 +1,5 @@
-import { Discipline } from "../entities/discipline.js";
-import { Workload } from "../entities/workload.js";
+import { Discipline } from "../discipline.js";
+import { Workload } from "../workload.js";
 
 type DiciplineFactoryParams = {
   id?: string;

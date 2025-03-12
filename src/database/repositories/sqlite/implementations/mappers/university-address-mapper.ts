@@ -1,7 +1,7 @@
 import { Address as AddressEntity } from "../../../../../entities/address.js";
-import { Address as AddressModel } from "../../../../../model/address.js";
+import { Address as AddressModel } from "../../model/address.js";
 import { University as UniversityEntity } from "../../../../../entities/university.js";
-import { University as UniversityModel } from "../../../../../model/university.js";
+import { University as UniversityModel } from "../../model/university.js";
 
 type UniversityAddress = {
   university: UniversityModel;

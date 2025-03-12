@@ -1,9 +1,9 @@
-import { ClassRoomFactory } from "../src/factories/class-room-factory.js";
-import { DisciplineFactory } from "../src/factories/discipline-factory.js";
+import { ClassRoomFactory } from "../src/entities/factories/class-room-factory.js";
+import { DisciplineFactory } from "../src/entities/factories/discipline-factory.js";
 import { InMemoryDisciplinesRepository } from "../src/database/repositories/in-memory/in-memory-disciplines-repository.js";
 import { InMemoryStudentsRepository } from "../src/database/repositories/in-memory/in-memory-students-repository.js";
-import { DisciplinesSeed } from "../src/seeds/diciplines-seed.js";
-import { StudentsSeed } from "../src/seeds/students-seed.js";
+import { DisciplinesSeed } from "../src/database/repositories/in-memory/seeds/diciplines-seed.js";
+import { StudentsSeed } from "../src/database/repositories/in-memory/seeds/students-seed.js";
 
 describe("Class Room", () => {
   const inMemoryDisciplinesRepository = new InMemoryDisciplinesRepository();

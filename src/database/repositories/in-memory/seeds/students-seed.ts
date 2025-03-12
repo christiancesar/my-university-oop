@@ -1,5 +1,5 @@
-import { Student } from "../entities/student.js";
-import { StudentFactory } from "../factories/student-factory.js";
+import { Student } from "../../../../entities/student.js";
+import { StudentFactory } from "../../../../entities/factories/student-factory.js";
 
 type StudentsSeedProps = {
   generateStudentsCount: number;

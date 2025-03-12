@@ -2,7 +2,7 @@ import { University } from "../entities/university.js";
 import { CreateUniversity } from "../database/repositories/dtos/create-university-dto.js";
 import { IUniversitiesRepository } from "../database/repositories/interfaces/universities-repository.js";
 import { IAddressesRepository } from "../database/repositories/interfaces/addresses-repository.js";
-import { AppError } from "../errors/AppError.js";
+import { AppError } from "../shared/errors/AppError.js";
 
 export class CreateUniversityUseCase {
   constructor(

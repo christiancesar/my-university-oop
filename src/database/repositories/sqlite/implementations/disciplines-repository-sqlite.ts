@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { Discipline } from "../../../../model/discipline.js";
+import { Discipline } from "../model/discipline.js";
 import { sqlite } from "../../../providers/sqlite-connection-database.js";
 import { CreateDiscipline } from "../../dtos/create-discipline-dto.js";
 import { FindDisciplineById } from "../../dtos/find-discipline-by-id-dto.js";

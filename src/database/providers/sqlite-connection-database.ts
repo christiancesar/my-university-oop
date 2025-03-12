@@ -1,5 +1,5 @@
 import { DatabaseSync } from "node:sqlite";
-import { Environment } from "../../utils/env/environment.js";
+import { Environment } from "../../shared/env/environment.js";
 
 class SQLite {
   private static instance: DatabaseSync | null = null;

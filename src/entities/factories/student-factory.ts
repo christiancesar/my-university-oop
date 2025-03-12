@@ -1,6 +1,6 @@
 import { fa, faker } from "@faker-js/faker";
-import { Student } from "../entities/student.js";
-import { Address } from "../entities/address.js";
+import { Student } from "../student.js";
+import { Address } from "../address.js";
 
 type StudentsFactoryParams = {
   id?: string;

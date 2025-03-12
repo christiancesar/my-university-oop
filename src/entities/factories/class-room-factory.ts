@@ -1,6 +1,6 @@
-import { ClassRoom } from "../entities/class-room.js";
-import { Discipline } from "../entities/discipline.js";
-import { Teacher } from "../entities/teacher.js";
+import { ClassRoom } from "../class-room.js";
+import { Discipline } from "../discipline.js";
+import { Teacher } from "../teacher.js";
 import { DisciplineFactory } from "./discipline-factory.js";
 import { TeacherFactory } from "./teacher-factory.js";
 

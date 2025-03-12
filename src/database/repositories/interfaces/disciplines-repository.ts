@@ -1,4 +1,4 @@
-import { Discipline } from "../../../model/discipline.js";
+import { Discipline } from "../sqlite/model/discipline.js";
 import { CreateDiscipline } from "../dtos/create-discipline-dto.js";
 import { FindDisciplineById } from "../dtos/find-discipline-by-id-dto.js";
 

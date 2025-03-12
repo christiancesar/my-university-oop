@@ -3,14 +3,14 @@ import { sqlite } from "../../../providers/sqlite-connection-database.js";
 import { CreateUniversity } from "../../dtos/create-university-dto.js";
 import { FindUniversityById } from "../../dtos/find-university-by-id-dto.js";
 import { IUniversitiesRepository } from "../../interfaces/universities-repository.js";
-import { AppError } from "../../../../errors/AppError.js";
+import { AppError } from "../../../../shared/errors/AppError.js";
 import {
   UpdateUniversity,
   UpdateUniversityAddress,
 } from "../../dtos/update-university-dto.js";
 import { University as UniversityEntity } from "../../../../entities/university.js";
-import { University as UniversityModel } from "../../../../model/university.js";
-import { Address as AddressModel } from "../../../../model/address.js";
+import { University as UniversityModel } from "../model/university.js";
+import { Address as AddressModel } from "../model/address.js";
 import { UniversityAddressMapper } from "./mappers/university-address-mapper.js";
 import { FindUniversityByName } from "../../dtos/find-university-by-name-dto.js";
 

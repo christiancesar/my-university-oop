@@ -3,10 +3,10 @@ import express from "express";
 import "express-async-errors";
 import cors from "cors";
 import { routes } from "./routes.js";
-import { interceptErrorMiddleware } from "./middlewares/interceptErrorMiddleware.js";
+import { interceptErrorMiddleware } from "./shared/middlewares/interceptErrorMiddleware.js";
 import { sqlite } from "./database/providers/sqlite-connection-database.js";
 import { verifyIntegrityDatabase } from "./database/repositories/sqlite/helper/verify-integrity-database-tables.js";
-import { Environment } from "./utils/env/environment.js";
+import { Environment } from "./shared/env/environment.js";
 
 const server = express();
 server.use(cors());

@@ -1,5 +1,5 @@
-import { Discipline } from "../entities/discipline.js";
-import { Workload } from "../entities/workload.js";
+import { Discipline } from "../../../../entities/discipline.js";
+import { Workload } from "../../../../entities/workload.js";
 
 export class DisciplinesSeed {
   static execute(): Discipline[] {

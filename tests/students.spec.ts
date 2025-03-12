@@ -1,5 +1,5 @@
-import { StudentFactory } from "../src/factories/student-factory.js";
-import { StudentsSeed } from "../src/seeds/students-seed.js";
+import { StudentFactory } from "../src/entities/factories/student-factory.js";
+import { StudentsSeed } from "../src/database/repositories/in-memory/seeds/students-seed.js";
 
 describe("Student", () => {
   it("should be able create a new student", () => {
