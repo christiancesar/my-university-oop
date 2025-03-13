@@ -7,28 +7,43 @@ import { CreateUniversityUseCase } from "./use-cases/create-university-use-case.
 import { DeleteUniversityByIdUseCase } from "./use-cases/delete-university-use-case.js";
 import { FindUniversityUseCase } from "./use-cases/find-university-use-case.js";
 import { UpdateUniversityUseCase } from "./use-cases/update-university-use-case.js";
+import { DisciplinesRepositorySqlite } from "./database/repositories/sqlite/implementations/disciplines-repository-sqlite.js";
+import { FindDisciplinesByUniversityIdUseCase } from "./use-cases/find-disciplines-by-university-id-use-case.js";
 
 export const routes = Router();
 
+//Repositories
 const universitiesRepositorySQlite = new UniversitiesRepositorySqlite();
-const addressesRepository = new AddressesRepositorySqlite();
+const addressesRepositorySQlite = new AddressesRepositorySqlite();
+const disciplinesRepositorySQlite = new DisciplinesRepositorySqlite();
 
-const createAddressUseCase = new CreateAddressUseCase(addressesRepository);
+//Services
+const createAddressUseCase = new CreateAddressUseCase(
+  addressesRepositorySQlite
+);
 const updateUniversityUseCase = new UpdateUniversityUseCase(
   universitiesRepositorySQlite
 );
 
 const createUniversity = new CreateUniversityUseCase(
   universitiesRepositorySQlite,
-  addressesRepository
+  addressesRepositorySQlite
 );
 
 const findUniversityById = new FindUniversityUseCase(
   universitiesRepositorySQlite
 );
+
 const deleteUniversityById = new DeleteUniversityByIdUseCase(
   universitiesRepositorySQlite
 );
+
+const findDisciplinesByUniversityIdUseCase =
+  new FindDisciplinesByUniversityIdUseCase(
+    universitiesRepositorySQlite,
+    disciplinesRepositorySQlite
+  );
+
 routes.post("/universities", async (request: Request, response: Response) => {
   const { name, addressId } = request.body;
 
@@ -80,13 +95,11 @@ routes.get(
   "/universities/:universityId/disciplines",
   async (request: Request, response: Response) => {
     const { universityId } = request.params;
-    const address = request.body as CreateAddress;
 
-    const newAddress = await createAddressUseCase.execute(address);
-    const universityUpdated = await updateUniversityUseCase.execute({
+    const disciplines = await findDisciplinesByUniversityIdUseCase.execute({
       universityId,
-      addressId: newAddress.id,
     });
-    response.json(universityUpdated);
+
+    response.json(disciplines);
   }
 );

@@ -1,7 +1,7 @@
 CREATE TABLE dailies (
   id TEXT NOT NULL PRIMARY KEY,
   description TEXT NOT NULL,
-  workload_pratical INTEGER NOT NULL,
+  workload_practical INTEGER NOT NULL,
   workload_theoretical INTEGER NOT NULL,
   created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TEXT,

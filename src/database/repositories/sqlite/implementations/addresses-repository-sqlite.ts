@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { Address } from "../model/address.js";
+import { Address } from "../../../model/address.js";
 import { CreateAddress } from "@database/repositories/dtos/create-address-dto.js";
 import { FindAddressById } from "@database/repositories/dtos/find-address-by-id-dto.js";
 import { sqlite } from "@database/providers/sqlite-connection-database.js";

@@ -3,7 +3,7 @@ export type CreateDiscipline = {
   name: string;
   period: string;
   pre_requisite_id: string | null;
-  workload_pratical: number;
+  workload_practical: number;
   workload_theoretical: number;
-  university_id: string | null;
+  university_id: string;
 };

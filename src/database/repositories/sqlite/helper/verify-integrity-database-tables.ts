@@ -24,10 +24,11 @@ const tablesRecord: Table = {
   disciplines: `CREATE TABLE IF NOT EXISTS disciplines (
     id TEXT PRIMARY KEY,
     name TEXT NOT NULL,
-    short_id TEXT NOT NULL,
-    period INTEGER NOT NULL,
+    short_id TEXT NOT NULL UNIQUE,
+    period INTEGER,
+    is_required BOOLEAN NOT NULL,
     pre_requisite_id TEXT,
-    workload_pratical INTEGER NOT NULL,
+    workload_practical INTEGER NOT NULL,
     workload_theoretical INTEGER NOT NULL,
     university_id TEXT,
     FOREIGN KEY (pre_requisite_id) REFERENCES disciplines (id)

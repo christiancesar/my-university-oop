@@ -10,8 +10,8 @@ import { University as UniversityEntity } from "@entities/university.js";
 import { AppError } from "@shared/errors/AppError.js";
 import { randomUUID } from "node:crypto";
 import { IUniversitiesRepository } from "../../interfaces/universities-repository.js";
-import { Address as AddressModel } from "../model/address.js";
-import { University as UniversityModel } from "../model/university.js";
+import { Address as AddressModel } from "../../../model/address.js";
+import { University as UniversityModel } from "../../../model/university.js";
 import { UniversityAddressMapper } from "./mappers/university-address-mapper.js";
 
 export class UniversitiesRepositorySqlite implements IUniversitiesRepository {

@@ -4,13 +4,23 @@
 import { Entity } from "./entity.js";
 import { Workload } from "./workload.js";
 
+type DisciplineConstructorProps = {
+  id?: string;
+  name: string;
+  period?: number | null;
+  workload: Workload;
+  shortId: string;
+  isRequired: boolean;
+  prerequisiteId?: string | null;
+};
+
 export class Discipline extends Entity {
   name: string;
   period?: number | null;
   workload: Workload;
-  shortId: number;
+  shortId: string;
   isRequired: boolean;
-  prerequisites?: Discipline | null;
+  prerequisiteId?: string | null;
 
   /**
    * Construtor da classe Discipline.
@@ -18,25 +28,25 @@ export class Discipline extends Entity {
    * @param name - Nome da disciplina.
    * @param workload - Carga horária da disciplina.
    * @param period - Período da disciplina.
-   * @param prerequisites - Pré-requisitos da disciplina.
+   * @param prerequisiteId - Pré-requisitos da disciplina.
    * @param isRequired - Indica se a disciplina é obrigatória.
    * @param Id - Id opcional da disciplina.
    */
-  constructor(
-    shortId: number,
-    name: string,
-    workload: Workload,
-    period?: number | null,
-    prerequisites?: Discipline | null,
-    isRequired?: boolean,
-    id?: string
-  ) {
+  constructor({
+    shortId,
+    name,
+    workload,
+    period,
+    prerequisiteId,
+    isRequired,
+    id,
+  }: DisciplineConstructorProps) {
     super(id);
     this.shortId = shortId;
     this.name = name;
     this.workload = workload;
     this.period = period;
     this.isRequired = isRequired ?? false;
-    this.prerequisites = prerequisites;
+    this.prerequisiteId = prerequisiteId;
   }
 }

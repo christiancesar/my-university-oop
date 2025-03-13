@@ -4,7 +4,7 @@ CREATE TABLE diciplines (
   name TEXT NOT NULL,
   period TEXT,
   pre_requisite_id TEXT,
-  workload_pratical INTEGER NOT NULL,
+  workload_practical INTEGER NOT NULL,
   workload_theoretical INTEGER NOT NULL,
   created_at TEXT DEFAULT CURRENT_TIMESTAMP,
   updated_at TEXT,
