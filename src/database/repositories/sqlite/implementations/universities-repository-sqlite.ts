@@ -1,3 +1,6 @@
+import { Address as AddressModel } from "@database/model/address.js";
+import { Discipline as DisciplineModel } from "@database/model/discipline.js";
+import { University as UniversityModel } from "@database/model/university.js";
 import { sqlite } from "@database/providers/sqlite-connection-database.js";
 import { CreateUniversity } from "@database/repositories/dtos/create-university-dto.js";
 import { FindUniversityById } from "@database/repositories/dtos/find-university-by-id-dto.js";
@@ -6,13 +9,11 @@ import {
   UpdateUniversity,
   UpdateUniversityAddress,
 } from "@database/repositories/dtos/update-university-dto.js";
+import { IUniversitiesRepository } from "@database/repositories/interfaces/universities-repository.js";
 import { University as UniversityEntity } from "@entities/university.js";
 import { AppError } from "@shared/errors/AppError.js";
 import { randomUUID } from "node:crypto";
-import { IUniversitiesRepository } from "../../interfaces/universities-repository.js";
-import { Address as AddressModel } from "../../../model/address.js";
-import { University as UniversityModel } from "../../../model/university.js";
-import { UniversityAddressMapper } from "./mappers/university-address-mapper.js";
+import { UniversityMapper } from "./mappers/university-mapper.js";
 
 export class UniversitiesRepositorySqlite implements IUniversitiesRepository {
   async createUniversity(data: CreateUniversity): Promise<UniversityEntity> {
@@ -33,7 +34,11 @@ export class UniversitiesRepositorySqlite implements IUniversitiesRepository {
             .get(data.addressId) as AddressModel)
         : null;
 
-      return UniversityAddressMapper.toEntity({ address, university });
+      const disciplines = sqlite
+        .prepare("SELECT * FROM disciplines WHERE university_id = ?")
+        .all(university.id) as DisciplineModel[];
+
+      return UniversityMapper.toEntity({ address, university, disciplines });
     } catch (error) {
       console.log(error);
       throw new AppError("Error while create university.");
@@ -54,8 +59,14 @@ export class UniversitiesRepositorySqlite implements IUniversitiesRepository {
             .get(university.address_id) as AddressModel)
         : null;
 
+      const disciplines = university?.address_id
+        ? (sqlite
+            .prepare("SELECT * FROM disciplines WHERE university_id = ?")
+            .all(university.id) as DisciplineModel[])
+        : null;
+
       return university
-        ? UniversityAddressMapper.toEntity({ address, university })
+        ? UniversityMapper.toEntity({ address, university, disciplines })
         : undefined;
     } catch (error) {
       throw new Error("Error while find university by id.", { cause: error });
@@ -76,8 +87,14 @@ export class UniversitiesRepositorySqlite implements IUniversitiesRepository {
             .get(university.address_id) as AddressModel)
         : null;
 
+      const disciplines = university?.address_id
+        ? (sqlite
+            .prepare("SELECT * FROM disciplines WHERE university_id = ?")
+            .all(university.id) as DisciplineModel[])
+        : null;
+
       return university
-        ? UniversityAddressMapper.toEntity({ address, university })
+        ? UniversityMapper.toEntity({ address, university, disciplines })
         : undefined;
     } catch (error) {
       throw new Error("Error while find university by name.", { cause: error });
@@ -124,7 +141,13 @@ export class UniversitiesRepositorySqlite implements IUniversitiesRepository {
             .get(university.address_id) as AddressModel)
         : null;
 
-      return UniversityAddressMapper.toEntity({ address, university });
+      const disciplines = university?.address_id
+        ? (sqlite
+            .prepare("SELECT * FROM disciplines WHERE university_id = ?")
+            .all(university.id) as DisciplineModel[])
+        : null;
+
+      return UniversityMapper.toEntity({ address, university, disciplines });
     } catch (error) {
       throw new Error("Error while update university", { cause: error });
     }
@@ -151,7 +174,13 @@ export class UniversitiesRepositorySqlite implements IUniversitiesRepository {
             .get(university.address_id) as AddressModel)
         : null;
 
-      return UniversityAddressMapper.toEntity({ university, address });
+      const disciplines = university?.address_id
+        ? (sqlite
+            .prepare("SELECT * FROM disciplines WHERE university_id = ?")
+            .all(university.id) as DisciplineModel[])
+        : null;
+
+      return UniversityMapper.toEntity({ university, address, disciplines });
     } catch (error) {
       throw new Error("Error while update university", { cause: error });
     }
