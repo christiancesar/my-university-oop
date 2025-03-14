@@ -8,7 +8,9 @@ model Discipline {
   workload_practical   Int
   workload_theoretical Int
   university_id        String?
-  University           University? @relation(fields: [university_id], references: [id])
+  university           University? @relation(fields: [university_id], references: [id])
+  created_at           DateTime    @default(now())
+  updated_at           DateTime    @updatedAt
 
   @@index([name])
   @@map("disciplines")

@@ -12,6 +12,8 @@ type DisciplineConstructorProps = {
   shortId: string;
   isRequired: boolean;
   prerequisiteId?: string | null;
+  createdAt?: Date;
+  updatedAt?: Date | null;
 };
 
 export class Discipline extends Entity {
@@ -21,7 +23,8 @@ export class Discipline extends Entity {
   shortId: string;
   isRequired: boolean;
   prerequisiteId?: string | null;
-
+  createdAt: Date;
+  updatedAt?: Date | null;
   /**
    * Construtor da classe Discipline.
    * @param shortId - ID curto da disciplina.
@@ -39,6 +42,8 @@ export class Discipline extends Entity {
     period,
     prerequisiteId,
     isRequired,
+    createdAt,
+    updatedAt,
     id,
   }: DisciplineConstructorProps) {
     super(id);
@@ -48,5 +53,7 @@ export class Discipline extends Entity {
     this.period = period;
     this.isRequired = isRequired ?? false;
     this.prerequisiteId = prerequisiteId;
+    this.createdAt = createdAt ?? new Date();
+    this.updatedAt = updatedAt ?? null;
   }
 }

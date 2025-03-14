@@ -8,7 +8,9 @@ model Address {
   state        String
   country      String
   zipcode      String
-  University   University[]
+  university   University[]
+  created_at   DateTime     @default(now())
+  updated_at   DateTime     @updatedAt
 
   @@map("addresses")
 }

@@ -13,6 +13,8 @@ type AddressConstructorProps = {
   country: string;
   zipCode: string;
   complement?: string | null;
+  createdAt?: Date;
+  updatedAt?: Date | null;
 };
 export class Address extends Entity {
   street: string;
@@ -23,6 +25,8 @@ export class Address extends Entity {
   state: string;
   country: string;
   zipCode: string;
+  createdAt: Date;
+  updatedAt?: Date | null;
 
   /**
    * Construtor da classe Address.
@@ -45,6 +49,8 @@ export class Address extends Entity {
     country,
     zipCode,
     complement,
+    createdAt,
+    updatedAt,
     id,
   }: AddressConstructorProps) {
     super(id);
@@ -56,5 +62,7 @@ export class Address extends Entity {
     this.state = state;
     this.country = country;
     this.zipCode = zipCode;
+    this.createdAt = createdAt ?? new Date();
+    this.updatedAt = updatedAt ?? null;
   }
 }
