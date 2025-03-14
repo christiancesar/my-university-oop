@@ -117,7 +117,9 @@
   "ts-node": {
     "transpileOnly": true,
     "esm": true,
-    "swc": true,
-    "experimentalResolver": true
+    "compilerOptions": {
+      "module": "ESNext",
+      "esModuleInterop": true
+    },
   }
 }

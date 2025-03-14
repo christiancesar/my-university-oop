@@ -2,7 +2,7 @@
   "name": "my-university",
   "description": "Create my manager university",
   "version": "1.0.0",
-  "main": "server.ts",
+  "main": "./src/server.ts",
   "keywords": [
     "nodejs",
     "typescript",
@@ -20,26 +20,32 @@
     "test:watch": "vitest --watch",
     "test:cov": "vitest run --coverage"
   },
+  "prisma": {
+    "schema": "src/database/providers/prisma/schema",
+    "seed": "ts-node src/database/providers/prisma/seed.ts"
+  },
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@swc/core": "^1.7.18",
     "@swc/helpers": "^0.5.12",
-    "@types/node": "^22.5.4",
+    "@types/node": "^22.13.10",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.3",
     "typescript": "^5.5.4",
     "vite-tsconfig-paths": "^5.0.1",
-    "vitest": "^2.0.5"
+    "vitest": "^2.0.5",
+    "@types/bun": "^1.2.5"
   },
   "dependencies": {
     "@faker-js/faker": "^9.5.0",
-    "@prisma/client": "^6.4.1",
+    "@prisma/client": "^6.5.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "express-async-errors": "^3.1.1",
-    "prisma": "^6.4.1",
+    "prisma": "^6.5.0",
     "zod": "^3.24.2"
-  }
+  },
+  "private": true
 }

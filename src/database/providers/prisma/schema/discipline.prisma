@@ -1,0 +1,15 @@
+model Discipline {
+  id                   String      @id @default(uuid())
+  name                 String
+  short_id             String      @unique()
+  is_required          Boolean
+  period               Int?
+  pre_requisite_id     String?
+  workload_practical   Int
+  workload_theoretical Int
+  university_id        String?
+  University           University? @relation(fields: [university_id], references: [id])
+
+  @@index([name])
+  @@map("disciplines")
+}
