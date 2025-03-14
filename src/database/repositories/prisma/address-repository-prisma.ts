@@ -3,8 +3,9 @@ import { FindAddressById } from "@database/repositories/dtos/find-address-by-id-
 import { Address } from "@entities/address.js";
 import { prisma } from "@src/database/providers/prisma/prisma.js";
 import { AddressMapper } from "./mappers/address-mapper.js";
+import { IAddressesRepository } from "../interfaces/addresses-repository.js";
 
-export class AddressesRepositoryPrisma {
+export class AddressesRepositoryPrisma implements IAddressesRepository {
   async createAddress(data: CreateAddress): Promise<Address> {
     const address = await prisma.address.create({
       data,

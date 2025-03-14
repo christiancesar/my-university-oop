@@ -4,9 +4,8 @@ import "express-async-errors";
 import cors from "cors";
 import { routes } from "./routes.js";
 import { interceptErrorMiddleware } from "./shared/middlewares/interceptErrorMiddleware.js";
-import { sqlite } from "./database/providers/sqlite-connection-database.js";
-import { verifyIntegrityDatabase } from "./database/repositories/sqlite/helper/verify-integrity-database-tables.js";
 import { Environment } from "./shared/env/environment.js";
+import { prisma } from "./database/providers/prisma/prisma.js";
 
 const server = express();
 server.use(cors());
@@ -16,9 +15,7 @@ server.use(interceptErrorMiddleware);
 
 async function main() {
   const port = Environment.getInstance().PORT;
-  // await prisma.$connect();
-  sqlite;
-  verifyIntegrityDatabase;
+  await prisma.$connect();
   server.listen(port, () => {
     console.log(`Server is running on port ${port}`);
   });
@@ -29,6 +26,5 @@ main()
     console.error(error);
   })
   .finally(async () => {
-    // await prisma.$disconnect();
-    // sqlite.close();
+    await prisma.$disconnect();
   });

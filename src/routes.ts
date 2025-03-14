@@ -1,47 +1,43 @@
 import { Request, Response, Router } from "express";
 import { CreateAddress } from "./database/repositories/dtos/create-address-dto.js";
-import { AddressesRepositorySqlite } from "./database/repositories/sqlite/implementations/addresses-repository-sqlite.js";
-import { UniversitiesRepositorySqlite } from "./database/repositories/sqlite/implementations/universities-repository-sqlite.js";
 import { CreateAddressUseCase } from "./use-cases/create-address-use-case.js";
 import { CreateUniversityUseCase } from "./use-cases/create-university-use-case.js";
 import { DeleteUniversityByIdUseCase } from "./use-cases/delete-university-use-case.js";
 import { FindUniversityUseCase } from "./use-cases/find-university-use-case.js";
 import { UpdateUniversityUseCase } from "./use-cases/update-university-use-case.js";
-import { DisciplinesRepositorySqlite } from "./database/repositories/sqlite/implementations/disciplines-repository-sqlite.js";
 import { FindDisciplinesByUniversityIdUseCase } from "./use-cases/find-disciplines-by-university-id-use-case.js";
+import { UniversitiesRepositoryPrisma } from "./database/repositories/prisma/universities-repository-prisma.js";
+import { AddressesRepositoryPrisma } from "./database/repositories/prisma/address-repository-prisma.js";
+import { DisciplinesRepositoryPrisma } from "./database/repositories/prisma/disciplines-repository-prisma.js";
 
 export const routes = Router();
 
 //Repositories
-const universitiesRepositorySQlite = new UniversitiesRepositorySqlite();
-const addressesRepositorySQlite = new AddressesRepositorySqlite();
-const disciplinesRepositorySQlite = new DisciplinesRepositorySqlite();
+const universitiesRepository = new UniversitiesRepositoryPrisma();
+const addressesRepository = new AddressesRepositoryPrisma();
+const disciplinesRepository = new DisciplinesRepositoryPrisma();
 
 //Services
-const createAddressUseCase = new CreateAddressUseCase(
-  addressesRepositorySQlite
-);
+const createAddressUseCase = new CreateAddressUseCase(addressesRepository);
 const updateUniversityUseCase = new UpdateUniversityUseCase(
-  universitiesRepositorySQlite
+  universitiesRepository
 );
 
 const createUniversity = new CreateUniversityUseCase(
-  universitiesRepositorySQlite,
-  addressesRepositorySQlite
+  universitiesRepository,
+  addressesRepository
 );
 
-const findUniversityById = new FindUniversityUseCase(
-  universitiesRepositorySQlite
-);
+const findUniversityById = new FindUniversityUseCase(universitiesRepository);
 
 const deleteUniversityById = new DeleteUniversityByIdUseCase(
-  universitiesRepositorySQlite
+  universitiesRepository
 );
 
 const findDisciplinesByUniversityIdUseCase =
   new FindDisciplinesByUniversityIdUseCase(
-    universitiesRepositorySQlite,
-    disciplinesRepositorySQlite
+    universitiesRepository,
+    disciplinesRepository
   );
 
 routes.post("/universities", async (request: Request, response: Response) => {
