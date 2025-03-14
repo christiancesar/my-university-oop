@@ -13,8 +13,7 @@ export interface IUniversitiesRepository {
     data: FindUniversityById
   ): Promise<UniversityEntity | undefined>;
   deleteUniversityById(data: FindUniversityById): Promise<boolean>;
-  updateUniversityById(data: UpdateUniversity): Promise<UniversityEntity>;
-  updateUniversityAddressByUniversityId(
+  updateUniversityById(
     data: UpdateUniversityAddress
   ): Promise<UniversityEntity>;
 

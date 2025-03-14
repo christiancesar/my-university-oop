@@ -1,8 +1,11 @@
 import { Address as AddressEntity } from "@entities/address.js";
 import { Address as AddressModel } from "@database/model/address.js";
+import { Prisma } from "@prisma/client";
+
+type AddressMapperToEntityProps = Prisma.AddressGetPayload<{}>;
 
 export class AddressMapper {
-  static toEntity(raw: AddressModel): AddressEntity {
+  static toEntity(raw: AddressMapperToEntityProps): AddressEntity {
     return new AddressEntity({
       id: raw.id,
       street: raw.street,

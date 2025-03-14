@@ -1,7 +1,9 @@
+import { Prisma } from "@prisma/client";
 import { Discipline as DisciplineModel } from "@src/database/model/discipline.js";
 import { Discipline as DisciplineEntity } from "@src/entities/discipline.js";
 import { Workload } from "@src/entities/workload.js";
 
+type DisciplineMapperToEntityProps = Prisma.DisciplineGetPayload<{}>;
 export class DisciplineMapper {
   // static toPersistence(discipline) {
   //   return {
@@ -16,7 +18,7 @@ export class DisciplineMapper {
   //   };
   // }
 
-  static toEntity(data: DisciplineModel): DisciplineEntity {
+  static toEntity(data: DisciplineMapperToEntityProps): DisciplineEntity {
     return new DisciplineEntity({
       id: data.id,
       name: data.name,
