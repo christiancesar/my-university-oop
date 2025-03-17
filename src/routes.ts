@@ -1,14 +1,15 @@
-import { Request, Response, Router } from "express";
-import { CreateAddress } from "./database/repositories/dtos/create-address-dto.js";
+import { Router } from "express";
+import type { Request, Response } from "express";
+import type { CreateAddress } from "./database/repositories/dtos/create-address-dto.js";
+import { AddressesRepositoryPrisma } from "./database/repositories/prisma/address-repository-prisma.js";
+import { DisciplinesRepositoryPrisma } from "./database/repositories/prisma/disciplines-repository-prisma.js";
+import { UniversitiesRepositoryPrisma } from "./database/repositories/prisma/universities-repository-prisma.js";
 import { CreateAddressUseCase } from "./use-cases/create-address-use-case.js";
 import { CreateUniversityUseCase } from "./use-cases/create-university-use-case.js";
 import { DeleteUniversityByIdUseCase } from "./use-cases/delete-university-use-case.js";
+import { FindDisciplinesByUniversityIdUseCase } from "./use-cases/find-disciplines-by-university-id-use-case.js";
 import { FindUniversityUseCase } from "./use-cases/find-university-use-case.js";
 import { UpdateUniversityUseCase } from "./use-cases/update-university-use-case.js";
-import { FindDisciplinesByUniversityIdUseCase } from "./use-cases/find-disciplines-by-university-id-use-case.js";
-import { UniversitiesRepositoryPrisma } from "./database/repositories/prisma/universities-repository-prisma.js";
-import { AddressesRepositoryPrisma } from "./database/repositories/prisma/address-repository-prisma.js";
-import { DisciplinesRepositoryPrisma } from "./database/repositories/prisma/disciplines-repository-prisma.js";
 
 export const routes = Router();
 
