@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
 import type { Discipline, University } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import disciplinesJson from "../../../../assets/disciplines.json" with { type: "json" };
 const prisma = new PrismaClient({
   log: ["query", "info", "warn", "error"],

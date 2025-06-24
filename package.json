@@ -13,7 +13,14 @@
   "author": "ccrs",
   "type": "module",
   "scripts": {
-    "dev": " bun --watch src/server.ts"
+    "dev": " bun --watch src/server.ts",
+    "prisma:migrate:dev": "prisma migrate dev",
+    "builder": "bun ./build.js",
+    "start:bun": "bun ./dist/server.js",
+    "start:node": "node ./dist/server.js",
+    "test": "vitest run",
+    "test:watch": "vitest --watch",
+    "test:cov": "vitest run --coverage"
   },
   "prisma": {
     "schema": "src/database/providers/prisma/schema",

@@ -1,7 +1,8 @@
 /**
  * Classe abstrata que representa uma entidade com um ID único.
  */
-import { randomUUIDv7 as randomUUID } from "bun";
+
+import { randomUUID } from "node:crypto";
 
 export abstract class Entity {
   private id: string;

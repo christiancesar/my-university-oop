@@ -1,10 +1,10 @@
 import { Discipline as DisciplineEntity } from "@entities/discipline.js";
-import { DisciplineMapper } from "./mappers/discipline-mapper.js";
 import { prisma } from "@src/database/providers/prisma/prisma.js";
-import { IDisciplinesRepository } from "../interfaces/disciplines-repository.js";
-import { CreateDiscipline } from "../dtos/create-discipline-dto.js";
-import { FindDisciplineById } from "../dtos/find-discipline-by-id-dto.js";
-import { FindDisciplineByUniversityId } from "../dtos/find-discipline-by-university-id.js";
+import type { CreateDiscipline } from "../dtos/create-discipline-dto.js";
+import type { FindDisciplineById } from "../dtos/find-discipline-by-id-dto.js";
+import type { FindDisciplineByUniversityId } from "../dtos/find-discipline-by-university-id.js";
+import type { IDisciplinesRepository } from "../interfaces/disciplines-repository.js";
+import { DisciplineMapper } from "./mappers/discipline-mapper.js";
 
 export class DisciplinesRepositoryPrisma implements IDisciplinesRepository {
   async createDiscipline(data: CreateDiscipline): Promise<DisciplineEntity> {

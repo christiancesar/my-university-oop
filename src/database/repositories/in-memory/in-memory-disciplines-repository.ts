@@ -1,55 +1,65 @@
-import { Discipline } from "../../../entities/discipline.js";
-
+import { Discipline } from "@src/database/model/discipline.js";
+import type { CreateDiscipline } from "../dtos/create-discipline-dto.js";
+import type { FindDisciplineById } from "../dtos/find-discipline-by-id-dto.js";
+import type { FindDisciplineByUniversityId } from "../dtos/find-discipline-by-university-id.js";
+import type { IDisciplinesRepository } from "../interfaces/disciplines-repository.js";
+import { randomUUIDv7 } from "bun";
+import { DisciplineMapper } from "../prisma/mappers/discipline-mapper.js";
+import { Discipline as DisciplineEntity } from "@entities/discipline.js";
 /**
  * Repositório de Disciplinas em Memória
  */
-export class InMemoryDisciplinesRepository {
-  private disciplines: Discipline[] = [];
+export class InMemoryDisciplinesRepository implements IDisciplinesRepository {
+  disciplines: Discipline[] = [];
+  async createDiscipline(data: CreateDiscipline): Promise<DisciplineEntity> {
+    const discipline = new Discipline({
+      id: randomUUIDv7(),
+      name: data.name,
+      is_required: data.is_required,
+      period: data.period,
+      pre_requisite_id: data.pre_requisite_id,
+      short_id: data.short_id,
+      university_id: data.university_id,
+      workload_practical: data.workload_practical,
+      workload_theoretical: data.workload_theoretical,
+      updated_at: new Date(),
+      created_at: new Date(),
+    });
 
-  /**
-   * Salva uma disciplina no repositório.
-   * @param discipline - A disciplina a ser salva.
-   */
-  save(discipline: Discipline): void {
     this.disciplines.push(discipline);
-  }
 
-  /**
-   * Encontra uma disciplina pelo ID.
-   * @param id - O ID da disciplina.
-   * @returns A disciplina encontrada ou undefined se não encontrada.
-   */
-  findById(id: string): Discipline | undefined {
-    return this.disciplines.find((discipline) => discipline.getId() === id);
+    return DisciplineMapper.toEntity({
+      ...discipline,
+      updated_at: discipline.updated_at!,
+    });
   }
-
-  /**
-   * Retorna todas as disciplinas no repositório.
-   * @returns Uma lista de todas as disciplinas.
-   */
-  findAll(): Discipline[] {
-    return this.disciplines;
-  }
-
-  /**
-   * Encontra uma disciplina pelo ID curto.
-   * @param shortId - O ID curto da disciplina.
-   * @returns A disciplina encontrada ou undefined se não encontrada.
-   */
-  findByShortId(shortId: number): Discipline | undefined {
-    return this.disciplines.find(
-      (discipline) => discipline.shortId === shortId
+  async findDisciplineById(
+    data: FindDisciplineById
+  ): Promise<DisciplineEntity | undefined> {
+    const discipline = this.disciplines.find(
+      (dp) => dp.id === data.disciplineId
     );
+
+    return discipline
+      ? DisciplineMapper.toEntity({
+          ...discipline,
+          updated_at: discipline.updated_at!,
+        })
+      : undefined;
   }
 
-  /**
-   * Encontra disciplinas pelo nome.
-   * @param name - O nome da disciplina.
-   * @returns Uma lista de disciplinas encontradas ou undefined se nenhuma for encontrada.
-   */
-  findByName(name: string): Discipline[] | undefined {
-    return this.disciplines.filter(
-      (discipline) => discipline.name.toLocaleLowerCase().search(name) !== -1
+  async findDisciplinesByUniversityId(
+    data: FindDisciplineByUniversityId
+  ): Promise<DisciplineEntity[]> {
+    const disciplines = this.disciplines.filter(
+      (dp) => dp.university_id === data.universityId
+    );
+
+    return disciplines.map((dp) =>
+      DisciplineMapper.toEntity({
+        ...dp,
+        updated_at: dp.updated_at!,
+      })
     );
   }
 }
